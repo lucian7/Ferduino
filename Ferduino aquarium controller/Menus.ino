@@ -1,8 +1,8 @@
-//------------------------------------menu----------------------------------------------------------- tela =1
+//------------------------------------ Menu 1 ----------------------------------------------------------- tela =1
 void menuScreen()
 {
 
-  printHeader("MENU");
+  printHeader("MENU 1");
 
   printButton("HORA E DATA", tanD[0], tanD[1], tanD[2], tanD[3]);
   printButton("TESTAR LED", tesT[0], tesT[1], tesT[2], tesT[3]);
@@ -13,9 +13,10 @@ void menuScreen()
   printButton("DOSADORAS", dosA[0], dosA[1], dosA[2], dosA[3]);
   printButton("WAVEMAKER", wavM[0], wavM[1], wavM[2], wavM[3]);
   printButton("INICIO", iniC[0], iniC[1], iniC[2], iniC[3]);
+  printButton("MENU 2", menU[0], menU[1], menU[2], menU[3]);
 }
 
-// -------------------------Relogio------------------------------------------------------tela=2
+// -------------------------Relógio------------------------------------------------------ tela =2
 void setClock()   
 {
   t_temp = rtc.getTime();
@@ -42,26 +43,16 @@ void setClock()
 
   printButton("SALVAR", prOK[0], prOK[1], prOK[2], prOK[3]);
   printButton("INICIO", iniC[0], iniC[1], iniC[2], iniC[3]);
-  printButton("MENU", menU[0], menU[1], menU[2], menU[3]);
+  printButton("MENU 1", menU[0], menU[1], menU[2], menU[3]);
 
+  setFont(SMALL, 255, 255, 255, 0, 0, 0);
+  myGLCD.print("HORA:", 10, 51);
+  myGLCD.print("DATA:", 10, 134); 
+  
   setFont(LARGE, 255, 255, 255, 0, 0, 0);
-
-  if (t_temp.date==0)
-  {
-    t_temp.date=1;
-    t_temp.mon=1;
-    t_temp.year=2010;
-    t_temp.dow=5;
-    t_temp.hour=0;
-    t_temp.min=0;
-    t_temp.sec=0;
-    ct=true;
-    cd=true;
-  }
-
-  myGLCD.print("   :     ", 70, 48);  //fill over old time
-  myGLCD.print("   :     ", 160, 48);  //fill over old time
-
+  myGLCD.print(":", 120, 48);
+  myGLCD.print(":", 210, 48);
+  
   if (t_temp.hour<10)
   {
     myGLCD.printNumI(0, 70, 48);
@@ -108,32 +99,35 @@ void setClock()
     myGLCD.printNumI(t_temp.mon, 160, 132);
   }
   myGLCD.printNumI(t_temp.year, 230, 132);
-  myGLCD.setFont(SmallFont);
-  myGLCD.print("HORA:", 10, 51);
-  myGLCD.print("DATA:", 10, 134);
-  setFont(LARGE, 255, 255, 255, 0, 0, 0);  
+  
 }
 
-void testScreen(boolean refreshAll=false)//--------------------------------teste-------------------------------------tela =3
+void testScreen(boolean refreshAll=false)//-------------------------------- Teste do leds ------------------------------------- tela =3
 {    
   if (refreshAll == true) 
   {  
     printHeader("TESTAR VARIACAO DE LUMINOSIDADE");
-    myGLCD.fillRect (1, 15, 318, 99);      //clear 'Test in progress'
+    myGLCD.fillRect (1, 15, 318, 37);      //clear 'Test in progress'
     printButton ("", stsT[0], stsT[1], stsT[2], stsT[3], true);   //start/stop
     printButton ("-10s", tenM[0], tenM[1], tenM[2], tenM[3], true);     //-10s
     printButton ("+10s", tenP[0], tenP[1], tenP[2], tenP[3], true);   //+10s
     myGLCD.print("INICIAR", stsT[0]+10, stsT[1]+15);
     myGLCD.print("TESTE", stsT[0]+25, stsT[1]+40);   
     printButton("INICIO", iniC[0], iniC[1], iniC[2], iniC[3]);
-    printButton("MENU", menU[0], menU[1], menU[2], menU[3]);
+    printButton("MENU 1", menU[0], menU[1], menU[2], menU[3]);
   } 
   else
   {
+    printHeader("TESTAR VARIACAO DE LUMINOSIDADE");
+    printButton ("", stsT[0], stsT[1], stsT[2], stsT[3], true);   //start/stop
+    printButton ("-10s", tenM[0], tenM[1], tenM[2], tenM[3], true);     //-10s
+    printButton ("+10s", tenP[0], tenP[1], tenP[2], tenP[3], true);   //+10s
+    myGLCD.print("INICIAR", stsT[0]+10, stsT[1]+15);
+    myGLCD.print("TESTE", stsT[0]+25, stsT[1]+40);   
     min_cnt=0;
 
-    myGLCD.setColor(0, 0, 0);
-    myGLCD.fillRect (1, 15, 318, 99);    //clear above buttons
+/*    myGLCD.setColor(0, 0, 0);
+    myGLCD.fillRect (1, 15, 318, 37);    //clear above buttons*/
     myGLCD.setColor(0, 0, 200);
     myGLCD.fillRect(stsT[0]+5, stsT[1]+5, stsT[2]-5, stsT[3]-40);   //clear 'start'
     setFont(LARGE, 255, 255, 255, 0, 0, 200);
@@ -150,14 +144,13 @@ void testScreen(boolean refreshAll=false)//--------------------------------teste
 
     while (LEDtestTick == true)               //test LED and speed up time
     {
-      if (myTouch.dataAvailable())  {
-        processMyTouch();
+      if (myTouch.dataAvailable())  
+      { 
+        processMyTouch(); 
       }
-
       if (millis() - previousMillis > 500)    //change time every 0.5s
       {
         previousMillis = millis();
-
         min_cnt++;
         int hour = min_cnt/60;
         int minut = min_cnt%60;
@@ -181,7 +174,7 @@ void testScreen(boolean refreshAll=false)//--------------------------------teste
   } 
 }
 
-//---------------------------------------------Temperatura--------------------------------tela =4 ----------
+//--------------------------------------------- Temperatura -------------------------------- tela =4 
 void tempScreen(boolean refreshAll=false)
 {
 
@@ -218,7 +211,7 @@ void tempScreen(boolean refreshAll=false)
   myGLCD.printNumF(temp2beO, 1, 140, 90);
   myGLCD.printNumF(temp2beA, 1, 140, 140);
 }
-void ledSetScreen()   //--------------------------------alterar valores-----------------------------------tela =5
+void ledSetScreen()   //-------------------------------- Alterar valores ----------------------------------- tela =5
 {
   int a;
 
@@ -257,11 +250,11 @@ void ledSetScreen()   //--------------------------------alterar valores---------
 
   printButton("ALTERAR", leST[0], leST[1], leST[2], leST[3], SMALL);
   printButton("SALVAR EEPROM", savE[0], savE[1], savE[2], savE[3], SMALL);
-  printButton("MENU", menU[0], menU[1], menU[2], menU[3]);
+  printButton("MENU 1", menU[0], menU[1], menU[2], menU[3]);
   printButton("INICIO", iniC[0], iniC[1], iniC[2], iniC[3]);
 
 }
-void ledChangeScreen()    //---------------------------------------potencia dos leds------------------------------tela =6
+void ledChangeScreen()    //--------------------------------------- Potência dos leds------------------------------ tela =6
 {
   if (WorB)
     printHeader("ALTERAR POTENCIAS DOS LEDS BRANCOS");
@@ -285,9 +278,9 @@ void ledChangeScreen()    //---------------------------------------potencia dos 
 
   printButton("SALVAR", prOK[0], prOK[1], prOK[2], prOK[3]);
   printButton("INICIO", iniC[0], iniC[1], iniC[2], iniC[3]);
-  printButton("MENU", menU[0], menU[1], menU[2], menU[3]);
+  printButton("MENU 1", menU[0], menU[1], menU[2], menU[3]);
 }
-void tpaScreen(boolean refreshAll = false) //--------------------------------------------------------tela =7
+void tpaScreen(boolean refreshAll = false) //-------------------------------------------------------- tela =7
 {
   if(refreshAll)
   {
@@ -319,7 +312,7 @@ void tpaScreen(boolean refreshAll = false) //-----------------------------------
     myGLCD.print("POR ESTAGIO:", 170, 46);
     printButton("SALVAR", prOK[0], prOK[1], prOK[2], prOK[3]);
     printButton("INICIO", iniC[0], iniC[1], iniC[2], iniC[3]);
-    printButton("MENU", menU[0], menU[1], menU[2], menU[3]);
+    printButton("MENU 1", menU[0], menU[1], menU[2], menU[3]);
   }
   if (temp2segunda == 1) {
     printButton_verde("SEGUNDA", segU[0], segU[1], segU[2], segU[3]); //botao segunda
@@ -399,16 +392,17 @@ void menu_dosadoras()//---------------------------------------------tela =8
   printButton("AUTOMATICO", autO[0], autO[1], autO[2], autO[3]);
   printButton("PERSONALIZADO", perS[0], perS[1], perS[2], perS[3]);
   printButton("REVER CONFIG.", reV[0], reV[1], reV[2], reV[3]);
+  printButton("DESATIVAR MODOS", atiV[0], atiV[1], atiV[2], atiV[3]);
   printButton("CALIBRAR", caliB[0], caliB[1], caliB[2], caliB[3]);
   printButton("INICIO", iniC[0], iniC[1], iniC[2], iniC[3]);
-  printButton("MENU", menU[0], menU[1], menU[2], menU[3]);
+  printButton("MENU 1", menU[0], menU[1], menU[2], menU[3]);
 }
 
 void graficoScreen()//------------------------------------------------------------tela =9
 {  
   printHeader("ESCOLHA UM GRAFICO"); 
   printButton("INICIO", iniC[0], iniC[1], iniC[2], iniC[3]); 
-  printButton("MENU", menU[0], menU[1], menU[2], menU[3]);
+  printButton("MENU 1", menU[0], menU[1], menU[2], menU[3]);
   printButton("TEMPERATURA", tempG[0], tempG[1], tempG[2],tempG[3]);
   printButton("PH AQUARIO", phA[0], phA[1], phA[2], phA[3]);
   printButton("PH REATOR", phR[0], phR[1], phR[2], phR[3]);
@@ -421,7 +415,7 @@ void waveScreen(boolean refreshAll=false)///------------------------------------
 {
   printHeader("WAVEMAKER");
   printButton("INICIO", iniC[0], iniC[1], iniC[2], iniC[3]);
-  printButton("MENU", menU[0], menU[1], menU[2], menU[3]);
+  printButton("MENU 1", menU[0], menU[1], menU[2], menU[3]);
 
   setFont(SMALL, 255, 255, 255, 0, 0, 0);
   myGLCD.print("FUNCAO INCOMPLETA", 80, 30);
@@ -430,7 +424,7 @@ void parametroScreen()//--------------------------------------------------------
 {  
   printHeader("ESCOLHA UM PARAMETRO"); 
   printButton("INICIO", iniC[0], iniC[1], iniC[2], iniC[3],false); 
-  printButton("MENU", menU[0], menU[1], menU[2], menU[3],false);
+  printButton("MENU 1", menU[0], menU[1], menU[2], menU[3],false);
   printButton("TEMPERATURA", tempG[0], tempG[1], tempG[2],tempG[3]);
   printButton("PH AQUARIO", phA[0], phA[1], phA[2], phA[3]);
   printButton("PH REATOR", phR[0], phR[1], phR[2], phR[3]);
@@ -531,10 +525,10 @@ void config_phA_Screen(boolean refreshAll=false)
     myGLCD.print("PH DESEJADO:", 110, 20);
     myGLCD.print("VARIACAO PERMITIDA:", 90, 70);
     myGLCD.print("VARIACAO PARA ACIONAR O ALARME:", 50, 120);
-    myGLCD.print("NAO HA FUNCAO DE CONTROLE", 25, 170);
+   /* myGLCD.print("NAO HA FUNCAO DE CONTROLE", 25, 170);
     myGLCD.print("ATRIBUIDADA PARA ESTE PARAMETRO", 25, 185);
     myGLCD.print("ESSES VALORES SAO APENAS ", 25, 200);
-    myGLCD.print("REFERENCIA PARA O GRAFICO.", 25, 215);
+    myGLCD.print("REFERENCIA PARA O GRAFICO.", 25, 215);**/
 
     printButton("-", temM[0], temM[1], temM[2], temM[3], true);      //temp minus
     printButton("+", temP[0], temP[1], temP[2], temP[3], true);      //temp plus
@@ -569,10 +563,10 @@ void config_dens_Screen(boolean refreshAll=false)
     myGLCD.print("DENSIDADE DESEJADA:", 90, 20);
     myGLCD.print("VARIACAO PERMITIDA:", 90, 70);
     myGLCD.print("VARIACAO PARA ACIONAR O ALARME:", 50, 120);
-    myGLCD.print("NAO HA FUNCAO DE CONTROLE", 25, 170);
+  /*  myGLCD.print("NAO HA FUNCAO DE CONTROLE", 25, 170);
     myGLCD.print("ATRIBUIDA PARA ESTE PARAMETRO", 25, 185);
     myGLCD.print("ESSES VALORES SAO APENAS", 25, 200);
-    myGLCD.print("REFERENCIA PARA O GRAFICO.", 25, 215);
+    myGLCD.print("REFERENCIA PARA O GRAFICO.", 25, 215);*/
 
     printButton("-", temM[0], temM[1], temM[2], temM[3], true);      //temp minus
     printButton("+", temP[0], temP[1], temP[2], temP[3], true);      //temp plus
@@ -599,7 +593,7 @@ void selecionar_dosadora(boolean refreshAll=false)//----------------------------
   printButton("DOSADORA 2", dosa2[0], dosa2[1], dosa2[2], dosa2[3]);
   printButton("DOSADORA 3", dosa3[0], dosa3[1], dosa3[2], dosa3[3]);
   printButton("INICIO", iniC[0], iniC[1], iniC[2], iniC[3]);
-  printButton("MENU", menU[0], menU[1], menU[2], menU[3]);
+  printButton("MENU 1", menU[0], menU[1], menU[2], menU[3]);
   printButton("VOLTAR", volT[0], volT[1], volT[2], volT[3]);  
 }
 
@@ -728,37 +722,41 @@ void config_dosagem_automatica(boolean refreshAll=false) // ----------tela =28
     modo_automatico_on_1_temp2 = modo_automatico_on_1;
     modo_automatico_on_2_temp2 = modo_automatico_on_2;
     modo_automatico_on_3_temp2 = modo_automatico_on_3;
+    modo_personalizado_on_1_temp2 = modo_personalizado_on_1;
+    modo_personalizado_on_2_temp2 = modo_personalizado_on_2;
+    modo_personalizado_on_3_temp2 = modo_personalizado_on_3;
+
+    printHeader("CONFIGURAR DOSAGEM AUTOMATICA");
+
+    printButton("+", houU[0], houU[1], houU[2], houU[3], true); //hour up
+    printButton("-", houD[0], houD[1], houD[2], houD[3], true); //hour down
+    printButton("+", minUT[0], minUT[1], minUT[2], minUT[3], true); //min up
+    printButton("-", minDT[0], minDT[1], minDT[2], minDT[3], true); //min down
+    printButton("+", houU[0]+deslocamento_botao_x, houU[1], houU[2]+deslocamento_botao_x, houU[3], true); //hora mais
+    printButton("-", houD[0]+deslocamento_botao_x, houD[1], houD[2]+deslocamento_botao_x, houD[3], true); //hora menos
+    printButton("+", minUT[0]+deslocamento_botao_x, minUT[1], minUT[2]+deslocamento_botao_x, minUT[3], true); //minuto mais
+    printButton("-", minDT[0]+deslocamento_botao_x, minDT[1], minDT[2]+deslocamento_botao_x, minDT[3], true); //minuto menos
+    printButton("+", minUT[0], minUT[1]+deslocamento_botao_y, minUT[2], minUT[3]+deslocamento_botao_y, true); //min up
+    printButton("-", minDT[0], minDT[1]+deslocamento_botao_y, minDT[2], minDT[3]+deslocamento_botao_y, true); //min down
+    printButton("+", durC[0], durC[1]+deslocamento_botao_y, durC[2], durC[3]+deslocamento_botao_y, true); //minuto mais
+    printButton("-", durB[0], durB[1]+deslocamento_botao_y, durB[2], durB[3]+deslocamento_botao_y, true); //minuto menos
+
+    printButton("INICIO", iniC[0], iniC[1], iniC[2], iniC[3]);
+    printButton("VOLTAR", volT[0], volT[1], volT[2], volT[3]);
+    printButton("SALVAR", salV[0], salV[1], salV[2], salV[3]);
+
+    setFont(LARGE, 255, 255, 255, 0, 0, 0);
+    myGLCD.print(":", 105, 48);
+    myGLCD.print(":", 105 + deslocamento_botao_x, 48);
+    myGLCD.setFont(SmallFont);
+    myGLCD.print("INICIAL:", 5, 51);
+    myGLCD.print("FINAL:", 172, 51);
+    myGLCD.print("SELECIONE O", 10, 31 + deslocamento_botao_y);
+    myGLCD.print("VOLUME ", 10, 55 + deslocamento_botao_y);
+    myGLCD.print("(ML/DIA):", 10, 75 + deslocamento_botao_y);
+    myGLCD.print("QUANTIDADE", 190, 46 + deslocamento_botao_y);
+    myGLCD.print("DE DOSES:", 190, 61 + deslocamento_botao_y);
   }
-  printHeader("CONFIGURAR DOSAGEM AUTOMATICA");
-
-  printButton("+", houU[0], houU[1], houU[2], houU[3], true); //hour up
-  printButton("-", houD[0], houD[1], houD[2], houD[3], true); //hour down
-  printButton("+", minUT[0], minUT[1], minUT[2], minUT[3], true); //min up
-  printButton("-", minDT[0], minDT[1], minDT[2], minDT[3], true); //min down
-  printButton("+", houU[0]+deslocamento_botao_x, houU[1], houU[2]+deslocamento_botao_x, houU[3], true); //hora mais
-  printButton("-", houD[0]+deslocamento_botao_x, houD[1], houD[2]+deslocamento_botao_x, houD[3], true); //hora menos
-  printButton("+", minUT[0]+deslocamento_botao_x, minUT[1], minUT[2]+deslocamento_botao_x, minUT[3], true); //minuto mais
-  printButton("-", minDT[0]+deslocamento_botao_x, minDT[1], minDT[2]+deslocamento_botao_x, minDT[3], true); //minuto menos
-  printButton("+", minUT[0], minUT[1]+deslocamento_botao_y, minUT[2], minUT[3]+deslocamento_botao_y, true); //min up
-  printButton("-", minDT[0], minDT[1]+deslocamento_botao_y, minDT[2], minDT[3]+deslocamento_botao_y, true); //min down
-  printButton("+", durC[0], durC[1]+deslocamento_botao_y, durC[2], durC[3]+deslocamento_botao_y, true); //minuto mais
-  printButton("-", durB[0], durB[1]+deslocamento_botao_y, durB[2], durB[3]+deslocamento_botao_y, true); //minuto menos
-
-  printButton("INICIO", iniC[0], iniC[1], iniC[2], iniC[3]);
-  printButton("VOLTAR", volT[0], volT[1], volT[2], volT[3]);
-  printButton("SALVAR", salV[0], salV[1], salV[2], salV[3]);
-
-  setFont(LARGE, 255, 255, 255, 0, 0, 0);
-  myGLCD.print(":", 105, 48);
-  myGLCD.print(":", 105 + deslocamento_botao_x, 48);
-  myGLCD.setFont(SmallFont);
-  myGLCD.print("INICIAL:", 5, 51);
-  myGLCD.print("FINAL:", 172, 51);
-  myGLCD.print("SELECIONE O", 10, 31 + deslocamento_botao_y);
-  myGLCD.print("VOLUME ", 10, 55 + deslocamento_botao_y);
-  myGLCD.print("(ML/DIA):", 10, 75 + deslocamento_botao_y);
-  myGLCD.print("QUANTIDADE", 190, 46 + deslocamento_botao_y);
-  myGLCD.print("DE DOSES:", 190, 61 + deslocamento_botao_y);
 
   if(dosadora_1_selecionada == true)
   {
@@ -983,29 +981,28 @@ void config_dosagem_personalizada(boolean refreshAll=false) // ----------tela =2
     temp2sabado_dosagem_personalizada_3 = sabado_dosagem_personalizada_3;
     temp2domingo_dosagem_personalizada_3 = domingo_dosagem_personalizada_3;
 
+    printHeader("CONFIGURAR DOSAGEM PERSONALIZADA");
+
+    printButton("+", houU[0], houU[1], houU[2], houU[3], true); //hour up
+    printButton("-", houD[0], houD[1], houD[2], houD[3], true); //hour down
+    printButton("+", minUT[0], minUT[1], minUT[2], minUT[3], true); //min up
+    printButton("-", minDT[0], minDT[1], minDT[2], minDT[3], true); //min down
+    printButton("+", houU[0]+deslocamento_botao_x, houU[1], houU[2]+deslocamento_botao_x, houU[3], true); //hora mais
+    printButton("-", houD[0]+deslocamento_botao_x, houD[1], houD[2]+deslocamento_botao_x, houD[3], true); //hora menos
+    printButton("+", minUT[0]+deslocamento_botao_x, minUT[1], minUT[2]+deslocamento_botao_x, minUT[3], true); //minuto mais
+    printButton("-", minDT[0]+deslocamento_botao_x, minDT[1], minDT[2]+deslocamento_botao_x, minDT[3], true); //minuto menos
+
+    setFont(LARGE, 255, 255, 255, 0, 0, 0);
+    myGLCD.print(":", 105, 48);
+    myGLCD.print(":", 105 + deslocamento_botao_x, 48);
+    myGLCD.setFont(SmallFont);
+    myGLCD.print("INICIAL:", 5, 51);
+    myGLCD.print("FINAL:", 172, 51);
+    printButton("PROXIMO", proX[0], proX[1], proX[2], proX[3]); 
+    printButton("INICIO", iniC[0], iniC[1], iniC[2], iniC[3]);
+    printButton("MENU 1", menU[0], menU[1], menU[2], menU[3]);
+    printButton("VOLTAR", volT[0], volT[1], volT[2], volT[3]);
   }
-  printHeader("CONFIGURAR DOSAGEM PERSONALIZADA");
-
-  printButton("+", houU[0], houU[1], houU[2], houU[3], true); //hour up
-  printButton("-", houD[0], houD[1], houD[2], houD[3], true); //hour down
-  printButton("+", minUT[0], minUT[1], minUT[2], minUT[3], true); //min up
-  printButton("-", minDT[0], minDT[1], minDT[2], minDT[3], true); //min down
-  printButton("+", houU[0]+deslocamento_botao_x, houU[1], houU[2]+deslocamento_botao_x, houU[3], true); //hora mais
-  printButton("-", houD[0]+deslocamento_botao_x, houD[1], houD[2]+deslocamento_botao_x, houD[3], true); //hora menos
-  printButton("+", minUT[0]+deslocamento_botao_x, minUT[1], minUT[2]+deslocamento_botao_x, minUT[3], true); //minuto mais
-  printButton("-", minDT[0]+deslocamento_botao_x, minDT[1], minDT[2]+deslocamento_botao_x, minDT[3], true); //minuto menos
-
-  setFont(LARGE, 255, 255, 255, 0, 0, 0);
-  myGLCD.print(":", 105, 48);
-  myGLCD.print(":", 105 + deslocamento_botao_x, 48);
-  myGLCD.setFont(SmallFont);
-  myGLCD.print("INICIAL:", 5, 51);
-  myGLCD.print("FINAL:", 172, 51);
-  printButton("PROXIMO", proX[0], proX[1], proX[2], proX[3]); 
-  printButton("INICIO", iniC[0], iniC[1], iniC[2], iniC[3]);
-  printButton("MENU", menU[0], menU[1], menU[2], menU[3]);
-  printButton("VOLTAR", volT[0], volT[1], volT[2], volT[3]);
-
   if(dosadora_1_selecionada == true)
   {
     setFont(SMALL, 255, 255, 255, 0, 0, 0);
@@ -1271,10 +1268,13 @@ void config_dosagem_personalizada_2(boolean refreshAll=false) // ----------tela 
     modo_personalizado_on_1_temp2 = modo_personalizado_on_1;
     modo_personalizado_on_2_temp2 = modo_personalizado_on_2;
     modo_personalizado_on_3_temp2 = modo_personalizado_on_3;
+    modo_automatico_on_1_temp2 = modo_automatico_on_1;
+    modo_automatico_on_2_temp2 = modo_automatico_on_2;
+    modo_automatico_on_3_temp2 = modo_automatico_on_3;
 
     printHeader("CONFIGURAR DOSAGEM PERSONALIZADA");
     printButton("INICIO", iniC[0], iniC[1], iniC[2], iniC[3]);
-    printButton("MENU", menU[0], menU[1], menU[2], menU[3]);
+    printButton("MENU 1", menU[0], menU[1], menU[2], menU[3]);
     printButton("ANTERIOR", anT[0],anT[1], anT[2], anT[3]);
     printButton("SALVAR", prOK[0],prOK[1], prOK[2], prOK[3]);
     printButton("+", minUT[0], minUT[1], minUT[2], minUT[3], true); //min up
@@ -1366,12 +1366,233 @@ void config_dosagem_personalizada_2(boolean refreshAll=false) // ----------tela 
   }
 }
 
-void rever_dosagem_personalizada() // ----------tela =32
+void rever_configuracao_dosadoras()//---------------------------------------------tela =32
+{
+
+  printHeader("ALTERAR CONFIGURACAO DAS DOSADORAS");
+
+  printButton("AUTOMATICO", manU[0], manU[1], manU[2], manU[3]);
+  printButton("PERSONALIZADO", autO[0], autO[1], autO[2], autO[3]);
+  printButton("INICIO", iniC[0], iniC[1], iniC[2], iniC[3]);
+  printButton("MENU 1", menU[0], menU[1], menU[2], menU[3]);
+  printButton("VOLTAR", volT[0], volT[1], volT[2], volT[3]);
+}
+
+void rever_dosagem_automatica() // ----------tela =33
+{
+
+  printHeader("REVER CONF. DA DOSAGEM AUTOMATICA");
+  printButton("INICIO", iniC[0], iniC[1], iniC[2], iniC[3]);
+  printButton("MENU 1", menU[0], menU[1], menU[2], menU[3]);
+  printButton("VOLTAR", volT[0], volT[1], volT[2], volT[3]);
+
+  myGLCD.setColor(161, 127, 73);                    
+  myGLCD.drawLine(1, 88, 319, 88);  
+  myGLCD.drawLine(1, 158, 319, 158);
+  myGLCD.drawLine(319, 15, 319, 239);
+
+  setFont(SMALL, 255, 255, 255, 0, 0, 0);
+  myGLCD.print("DOSADORA 1:", 100, 30);   
+  myGLCD.print("INICIAL:", 10, 50);  
+  myGLCD.print("FINAL:", 118, 50);
+  myGLCD.print("QUANTIDADE DE DOSES:", 10, 70);
+  myGLCD.print("VOLUME:", 215, 50);    //Posição correta
+  myGLCD.print(":", 90, 50);
+  myGLCD.print(":", 180, 50);
+
+  myGLCD.printNumF(dose_dosadora_1_automatica, 1, 275, 50); //Posição correta
+  myGLCD.printNumI(quantidade_dose_dosadora_1_automatica, 170, 70);
+
+  if(hora_inicial_dosagem_automatica_1 < 10)
+  {
+    myGLCD.printNumI(0, 72, 50);
+    myGLCD.printNumI(hora_inicial_dosagem_automatica_1, 80, 50);
+  }
+  else
+  {
+    myGLCD.printNumI(hora_inicial_dosagem_automatica_1, 72, 50);
+  }
+  if(minuto_inicial_dosagem_automatica_1 < 10)
+  {
+    myGLCD.printNumI(0, 98, 50);
+    myGLCD.printNumI(minuto_inicial_dosagem_automatica_1, 106, 50);
+  }
+  else
+  {
+    myGLCD.printNumI(minuto_inicial_dosagem_automatica_1, 98, 50);
+  }
+  if(hora_final_dosagem_automatica_1 < 10)
+  {
+    myGLCD.printNumI(0, 165, 50);
+    myGLCD.printNumI(hora_final_dosagem_automatica_1, 173, 50); 
+  }
+  else
+  {
+    myGLCD.printNumI(hora_final_dosagem_automatica_1, 165, 50);
+  }
+  if(minuto_final_dosagem_automatica_1 < 10)
+  {
+    myGLCD.printNumI(0, 188, 50);
+    myGLCD.printNumI(minuto_final_dosagem_automatica_1, 196, 50);
+  }
+  else
+  {
+    myGLCD.printNumI(minuto_final_dosagem_automatica_1, 188, 50);
+  }
+
+  if (modo_automatico_on_1 == 1) 
+  {
+    printButton_verde("ON", 200, 65, 245, 85); 
+  } 
+  else 
+  {
+    printButton("ON", 200, 65, 245, 85); 
+  }
+  if (modo_automatico_on_1 == 0) 
+  {
+    printButton_verde("OFF", 250, 65, 295, 85); 
+  } 
+  else 
+  {
+    printButton("OFF", 250, 65, 295, 85); 
+  }
+  setFont(SMALL, 255, 255, 255, 0, 0, 0);    
+  myGLCD.print("DOSADORA 2:", 100, 100);   
+  myGLCD.print("INICIAL:", 10, 120);  
+  myGLCD.print("FINAL:", 118, 120);
+  myGLCD.print("QUANTIDADE DE DOSES:", 10, 140);
+  myGLCD.print("VOLUME:", 215, 120);    
+  myGLCD.print(":", 90, 120);
+  myGLCD.print(":", 180, 120);
+
+  myGLCD.printNumF(dose_dosadora_2_automatica, 1, 275, 120); 
+  myGLCD.printNumI(quantidade_dose_dosadora_2_automatica, 170, 140);
+  if(hora_inicial_dosagem_automatica_2 < 10)
+  {
+    myGLCD.printNumI(0, 72, 120);
+    myGLCD.printNumI(hora_inicial_dosagem_automatica_2, 80, 120);
+  }
+  else
+  {
+    myGLCD.printNumI(hora_inicial_dosagem_automatica_2, 72, 120);
+  }
+  if(minuto_inicial_dosagem_automatica_2 < 10)
+  {
+    myGLCD.printNumI(0, 98, 120);
+    myGLCD.printNumI(minuto_inicial_dosagem_automatica_2, 106, 120);
+  }
+  else
+  {
+    myGLCD.printNumI(minuto_inicial_dosagem_automatica_2, 98, 120);
+  }
+  if(hora_final_dosagem_automatica_2 < 10)
+  {
+    myGLCD.printNumI(0, 165, 120);
+    myGLCD.printNumI(hora_final_dosagem_automatica_2, 173, 120); 
+  }
+  else
+  {
+    myGLCD.printNumI(hora_final_dosagem_automatica_2, 165, 120);
+  }
+  if(minuto_final_dosagem_automatica_2 < 10)
+  {
+    myGLCD.printNumI(0, 188, 120);
+    myGLCD.printNumI(minuto_final_dosagem_automatica_2, 196, 120);
+  }
+  else
+  {
+    myGLCD.printNumI(minuto_final_dosagem_automatica_2, 188, 120);
+  }
+
+  if (modo_automatico_on_2 == 1) 
+  {
+    printButton_verde("ON", 200, 135, 245, 155); 
+  } 
+  else 
+  {
+    printButton("ON", 200, 135, 245, 155); 
+  }
+  if (modo_automatico_on_2 == 0) 
+  {
+    printButton_verde("OFF", 250, 135, 295, 155); 
+  } 
+  else 
+  {
+    printButton("OFF", 250, 135, 295, 155); 
+  } 
+  setFont(SMALL, 255, 255, 255, 0, 0, 0);    
+  myGLCD.print("DOSADORA 3:", 100, 170);   
+  myGLCD.print("INICIAL:", 10, 190);  
+  myGLCD.print("FINAL:", 118, 190);
+  myGLCD.print("QUANTIDADE DE DOSES:", 10, 210);
+  myGLCD.print("VOLUME:", 215, 190);    
+  myGLCD.print(":", 90, 190);
+  myGLCD.print(":", 180, 190);
+
+  myGLCD.printNumF(dose_dosadora_3_automatica, 1, 275, 190); 
+  myGLCD.printNumI(quantidade_dose_dosadora_3_automatica, 170, 210);
+  if(hora_inicial_dosagem_automatica_3 < 10)
+  {
+    myGLCD.printNumI(0, 72, 190);
+    myGLCD.printNumI(hora_inicial_dosagem_automatica_3, 80, 190);
+  }
+  else
+  {
+    myGLCD.printNumI(hora_inicial_dosagem_automatica_3, 72, 190);
+  }
+  if(minuto_inicial_dosagem_automatica_3 < 10)
+  {
+    myGLCD.printNumI(0, 98, 190);
+    myGLCD.printNumI(minuto_inicial_dosagem_automatica_3, 106, 190);
+  }
+  else
+  {
+    myGLCD.printNumI(minuto_inicial_dosagem_automatica_3, 98, 190);
+  }
+  if(hora_final_dosagem_automatica_3 < 10)
+  {
+    myGLCD.printNumI(0, 165, 190);
+    myGLCD.printNumI(hora_final_dosagem_automatica_3, 173, 190); 
+  }
+  else
+  {
+    myGLCD.printNumI(hora_final_dosagem_automatica_3, 165, 190);
+  }
+  if(minuto_final_dosagem_automatica_3 < 10)
+  {
+    myGLCD.printNumI(0, 188, 190);
+    myGLCD.printNumI(minuto_final_dosagem_automatica_3, 196, 190);
+  }
+  else
+  {
+    myGLCD.printNumI(minuto_final_dosagem_automatica_3, 188, 190);
+  }
+
+  if (modo_automatico_on_3 == 1) 
+  {
+    printButton_verde("ON", 200, 205, 245, 225); 
+  } 
+  else 
+  {
+    printButton("ON", 200, 205, 245, 225); 
+  }
+  if (modo_automatico_on_3 == 0) 
+  {
+    printButton_verde("OFF", 250, 205, 295, 225); 
+  } 
+  else 
+  {
+    printButton("OFF", 250, 205, 295, 225); 
+  }     
+}
+
+void rever_dosagem_personalizada() // ------------------------------------------------------------------tela =34
 {
 
   printHeader("REVER CONF. DA DOSAGEM PERSONALIZADA");
   printButton("INICIO", iniC[0], iniC[1], iniC[2], iniC[3]);
-  printButton("MENU", menU[0], menU[1], menU[2], menU[3]);
+  printButton("MENU 1", menU[0], menU[1], menU[2], menU[3]);
+  printButton("VOLTAR", volT[0], volT[1], volT[2], volT[3]);
 
   myGLCD.setColor(161, 127, 73);                    
   myGLCD.drawLine(1, 88, 319, 88);  
@@ -1737,3 +1958,162 @@ void rever_dosagem_personalizada() // ----------tela =32
     printButton("OFF", 250, 205, 295, 225); 
   }     
 }
+
+//---------------------------------------------Desativar dosadoras--------------------------------tela =35 ----------
+void desativar_dosadoras(boolean refreshAll = false)
+{
+  if(refreshAll == true)
+  {
+    if((modo_personalizado_on_1 == 1) || (modo_automatico_on_1 == 1))
+    {
+      ativar_desativar_1 = 1;
+    }
+    else
+    {
+      ativar_desativar_1 = 0;
+    }
+    if((modo_personalizado_on_2 == 1) || (modo_automatico_on_2 == 1))
+    {
+      ativar_desativar_2 = 1;
+    }
+    else
+    {
+      ativar_desativar_2 = 0;
+    }
+    if((modo_personalizado_on_3 == 1) || (modo_automatico_on_3 == 1))
+    {
+      ativar_desativar_3 = 1;
+    }
+    else
+    {
+      ativar_desativar_3 = 0;
+    }
+    printHeader("DESATIVAR DOSADORAS");
+    printButton("INICIO", iniC[0], iniC[1], iniC[2], iniC[3]);
+    printButton("MENU 1", menU[0], menU[1], menU[2], menU[3]);
+    printButton("SALVAR", salV[0], salV[1], salV[2], salV[3]);
+    printButton("VOLTAR", volT[0], volT[1], volT[2], volT[3]);
+
+    setFont(SMALL, 255, 255, 255, 0, 0, 0); 
+    myGLCD.print("DOSADORA 1:", 120, 30);
+    myGLCD.print("DOSADORA 2:", 120, 100);
+    myGLCD.print("DOSADORA 3:", 120, 170); 
+    setFont(SMALL, 255, 0, 0, 0, 0, 0); 
+    myGLCD.print("USE ESTA", 230, 60);
+    myGLCD.print("FUNCAO", 230, 75);
+    myGLCD.print("APENAS PARA", 230, 90);
+    myGLCD.print("DESATIVAR", 230, 105);
+    myGLCD.print("OS MODOS", 230, 120); 
+    myGLCD.print("DE DOSAGEM.", 230, 135); 
+  }
+  if (ativar_desativar_1 == 1)
+  {
+    printButton_verde("ATIVADO", 100, 45, 220, 85);
+    myGLCD.setColor(0, 0, 0);
+    myGLCD.fillRect (3, 26, 124, 43);
+    myGLCD.fillRect (3, 45, 95, 61);
+    myGLCD.fillRect (3, 60, 95, 76);
+    myGLCD.fillRect (3, 75, 95, 91);
+    setFont(SMALL, 255, 255, 255, 0, 0, 0);
+    myGLCD.print("UM DOS MODOS", 10, 30);
+    myGLCD.print("DE DOSAGEM", 10, 45);
+    myGLCD.print("ESTA:", 10, 60); 
+  } 
+  else 
+  {
+    printButton("DESATIVADOS", 100, 45, 220, 85);
+    setFont(SMALL, 255, 255, 0, 0, 0, 0); 
+    myGLCD.print("AMBOS OS MODOS", 3, 30); 
+    myGLCD.print("DE DOSAGEM  ", 3, 45);
+    myGLCD.print("ESTAO OU", 3, 60);
+    myGLCD.print("SERAO:", 3, 75); 
+  }
+  if (ativar_desativar_2 == 1)
+  {
+    printButton_verde("ATIVADO", 100, 115, 220, 155);
+    myGLCD.setColor(0, 0, 0); 
+    myGLCD.fillRect (3, 96, 124, 113);
+    myGLCD.fillRect (3, 115, 95, 131);
+    myGLCD.fillRect (3, 130, 95, 146);
+    myGLCD.fillRect (3, 145, 95, 161); 
+    setFont(SMALL, 255, 255, 255, 0, 0, 0);
+    myGLCD.print("UM DOS MODOS", 10, 100);
+    myGLCD.print("DE DOSAGEM", 10, 115);
+    myGLCD.print("ESTA:", 10, 130); 
+  } 
+  else 
+  {
+    printButton("DESATIVADOS", 100, 115, 220, 155); 
+    setFont(SMALL, 255, 255, 0, 0, 0, 0); 
+    myGLCD.print("AMBOS OS MODOS", 3, 100); 
+    myGLCD.print("DE DOSAGEM  ", 3, 115);
+    myGLCD.print("ESTAO OU", 3, 130);
+    myGLCD.print("SERAO:", 3, 145);
+  }
+  if (ativar_desativar_3 == 1)
+  {
+    printButton_verde("ATIVADO", 100, 185, 220, 225); 
+    myGLCD.setColor(0, 0, 0);
+    myGLCD.fillRect (3, 166, 124, 183);
+    myGLCD.fillRect (3, 185, 95, 201);
+    myGLCD.fillRect (3, 200, 95, 216);
+    myGLCD.fillRect (3, 215, 95, 231);
+    setFont(SMALL, 255, 255, 255, 0, 0, 0); 
+    myGLCD.print("UM DOS MODOS", 10, 170);
+    myGLCD.print("DE DOSAGEM", 10, 185);
+    myGLCD.print("ESTA:", 10, 200); 
+  } 
+  else 
+  {
+    printButton("DESATIVADOS", 100, 185, 220, 225);
+    setFont(SMALL, 255, 255, 0, 0, 0, 0); 
+    myGLCD.print("AMBOS OS MODOS", 3, 170); 
+    myGLCD.print("DE DOSAGEM  ", 3, 185);
+    myGLCD.print("ESTAO OU", 3, 200);
+    myGLCD.print("SERAO:", 3, 215);
+  }
+}
+
+//--------------------------------------------- Potência mínima e máxima para a luz noturna -------------------------------- tela =36 
+void luz_noturna(boolean refreshAll=false)
+{
+
+  if (refreshAll)
+  {
+    tMaxI = MaxI;
+    tMinI = MinI;
+
+    printHeader("LUZ NOTURNA   255 = 100 %");
+
+    setFont(SMALL, 255, 255, 255, 0, 0, 0);
+    myGLCD.print("ILUMINACAO MAXIMA:", 90, 70);
+    myGLCD.print("ILUMINACAO MINIMA:", 90, 170);
+    myGLCD.print("LUA CHEIA:", 120, 20);
+    myGLCD.print("LUA NOVA:", 125, 120);
+    
+    printButton("-", temM[0], temM[1], temM[2], temM[3], true);      //Lua cheia menos
+    printButton("+", temP[0], temP[1], temP[2], temP[3], true);      //Lua cheia mais
+    printButton("-", almM[0], almM[1], almM[2], almM[3], true);      //Lua nova menos
+    printButton("+", almP[0], almP[1], almP[2], almP[3], true);      //Lua nova mais
+
+    printButton("SALVAR", prOK[0], prOK[1], prOK[2], prOK[3]);
+    printButton("INICIO", iniC[0], iniC[1], iniC[2], iniC[3]);
+    printButton("MENU 2", menU[0], menU[1], menU[2], menU[3]);
+  }
+
+  setFont(LARGE, 255, 255, 255, 0, 0, 0); 
+  myGLCD.printNumI(tMaxI, 135, 40);
+  myGLCD.printNumI(tMinI, 135, 140);
+}
+
+//--------------------------------------------- Menu 2 -------------------------------- tela =37
+void menuScreen_2()
+{
+
+  printHeader("MENU 2");
+  printButton("LUZ NOTURNA", tanD[0], tanD[1], tanD[2], tanD[3]);
+  printButton("MENU 1", menU[0], menU[1], menU[2], menU[3]);
+  printButton("INICIO", iniC[0], iniC[1], iniC[2], iniC[3]);
+}
+
+

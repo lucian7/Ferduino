@@ -34,7 +34,7 @@ float moonPhase(int moonYear, int moonMonth, int moonDay)
     phase = 2*(LC-AG)/LC; 
   }
   //Determine the Lunar Phase
-  if ((AG >= 0) && (AG <= 5.17))         // 0 a 35%        
+  if ((AG >= 0) && (AG <= 5.54))         // 0 a 35%        
   { 
     LP = "LUA NOVA"; 
   }

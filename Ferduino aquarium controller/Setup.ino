@@ -1,10 +1,11 @@
 //------------------------setup------------------------------
 void setup()
 {
-  Serial.begin(38400);
-  Serial2.begin(38400); //stamps
+  Serial.begin(38400); //Inicia a comunicação com a  porta serial 0 para obter mensagens de depuração.
+  Serial2.begin(38400); //Inicia a comunicação com a  porta serial 2 onde estão conectados os "stamps".
   pinMode(ledPinBlue, OUTPUT);
   pinMode(ledPinWhite, OUTPUT);
+  pinMode(ledPinMoon, OUTPUT); 
   pinMode(aquecedorPin, OUTPUT);
   pinMode(chillerPin, OUTPUT);
   pinMode(alarmPin, OUTPUT);
@@ -23,28 +24,28 @@ void setup()
   pinMode (dosadora2, OUTPUT);
   pinMode (dosadora3, OUTPUT);
 
-  myGLCD.InitLCD(LANDSCAPE);
-  myGLCD.clrScr();
+  myGLCD.InitLCD(LANDSCAPE); // Orientação da imagem no LCD.
+  myGLCD.clrScr(); // Limpa o LCD.
 
-  myTouch.InitTouch(LANDSCAPE);
-  myTouch.setPrecision(PREC_MEDIUM);
+  myTouch.InitTouch(LANDSCAPE); // Orientação do "touch screen".
+  myTouch.setPrecision(PREC_MEDIUM); // Define a precisão do "touch screen".
 
-  sensors.begin();     //start up temperature library
-  // set the resolution to 10 bit
-  sensors.setResolution(sensor_agua, 10);
-  sensors.setResolution(sensor_dissipador, 10);
+  sensors.begin();     //Inicia as leituras das sondas de temperatura.
+  sensors.setResolution(sensor_agua, 10); // Define a resolução em 10 bits.
+  sensors.setResolution(sensor_dissipador, 10); // Define a resolução em 10 bits.
 
   if(Ethernet_Shield == true)
   {
-    if (ether.begin(sizeof Ethernet::buffer, mymac) == 0) 
+    if (ether.begin(sizeof Ethernet::buffer, mymac) == 0) // Inicia a comunicação com o "ethernet shield".
     {
       Serial.println( "Failed to access Ethernet controller");
     }
-    ether.staticSetup(myip,gwip);
+    ether.staticSetup(myip,gwip); // Seta o IP e o "Gateway".
   }
-  // Set the clock to run-mode
-  rtc.halt(false);
-  min_cnt= (t.hour*60)+t.min;
+
+  rtc.halt(false); // Inicia o funcionamento do RTC.
+  
+  //Lê a variáveis guardadas na EEPROM.
   ReadFromEEPROM();
   lertpaEEPROM();
   lerPHAEEPROM();
@@ -52,45 +53,48 @@ void setup()
   lerORPEEPROM();
   lerDENEEPROM();
   ler_dosadora_EEPROM();
-  LED_levels_output(); 
-  card.init(SPI_QUARTER_SPEED,chipselect);
+  ler_luz_noturna_EEPROM();
+  
+  card.init(SPI_QUARTER_SPEED,chipselect); // Inicia a comunicação com o cartão SD.
   volume.init(&card);
   root.openRoot(&volume);
-  mainScreen(true);
-  Open_channel(ph1);
+  
+  mainScreen(true); // Exibe a tela inicial no LCD.
+  
+  Open_channel(ph1); 
   delay(50);
-  Serial2.print("e");
+  Serial2.print("e"); // Envia um comando para que o "stamp" pare de enviar as leituras.
   Serial2.print('\r');
   delay(1000);
   Serial2.flush();
-  Serial2.print("L0");
+  Serial2.print("L0"); // Envia um comando para que o "stamp" apague o led de depuração.
   Serial2.print('\r');
   delay(1000);
   Open_channel(ph2);
   delay(50);
-  Serial2.print("e");
+  Serial2.print("e"); // Envia um comando para que o "stamp" pare de enviar as leituras.
   Serial2.print('\r');
   delay(1000);
   Serial2.flush();
-  Serial2.print("L0");
+  Serial2.print("L0"); // Envia um comando para que o "stamp" apague o led de depuração.
   Serial2.print('\r');
   delay(1000);
   Open_channel(orp);
   delay(50);
-  Serial2.print("e");
+  Serial2.print("e"); // Envia um comando para que o "stamp" pare de enviar as leituras.
   Serial2.print('\r');
   delay(1000);
   Serial2.flush();
-  Serial2.print("L0");
+  Serial2.print("L0"); // Envia um comando para que o "stamp" apague o led de depuração.
   Serial2.print('\r');
   delay(1000);    
   Open_channel(ec);
   delay(50);
-  Serial2.print("e");
+  Serial2.print("e"); // Envia um comando para que o "stamp" pare de enviar as leituras.
   Serial2.print('\r');
   delay(1000);
   Serial2.flush();
-  Serial2.print("L0");
+  Serial2.print("L0"); // Envia um comando para que o "stamp" apague o led de depuração.
   Serial2.print('\r');
   delay(1000);
 

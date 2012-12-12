@@ -1,6 +1,5 @@
 void checktpa()
 {
-  t = rtc.getTime();
   tempo = (duracaomaximatpa * 60000ul);
 
   if ((segunda==t.dow) && (hora==t.hour) && (minuto==t.min) && (t.sec<=5) && (falha_tpa == false))

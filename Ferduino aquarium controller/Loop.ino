@@ -1,6 +1,7 @@
 //-----------------------main loop------------------------------
 void loop()
 {
+   t = rtc.getTime(); // Atualiza as variáveis que usam o RTC.
   /*  int valor1=0;
    int valor2=0;
    int valor3=0;
@@ -15,55 +16,37 @@ void loop()
    valor5 = analogRead(sensor5);
    valor6 = analogRead(sensor6);*/
 
- if(Ethernet_Shield == true)
-  {
-    ether.packetLoop(ether.packetReceive());
-  }
-
-  if (myTouch.dataAvailable())  
-  { 
-    processMyTouch(); 
-  }
-
-  if(Stamps == true)
-  {
-    if((millis() - millis_antes) >= 120000)
-    {
-    millis_antes = millis();        
-   parametros();
-    }
-  }
-  if (millis() - previousMillis > 5000)    //check time, temp and LED levels every 5 s
+  if (millis() - previousMillis > 5000)    // Verifica as funções a cada 5 segundos.
   {
     previousMillis = millis();  
-    t = rtc.getTime();
-    checkTempC();
-    min_cnt= (t.hour*60)+t.hour;
-    LED_levels_output();
-    reposicao_agua_doce();
-    check_nivel();
-    check_PH_reator();
-    check_PH_aquario();
-    check_densidade();
-    check_ORP();
-    check_alarme();
+    checkTempC(); // Verifica as temperaturas.
+    min_cnt= (t.hour*60)+t.hour; // Atualiza o intervalo para determinar a potência dos leds.
+    LED_levels_output(); // Atualiza a potência de saída dos leds
+    reposicao_agua_doce(); // Verifica se há a necessidade reposição da água doce.
+    check_nivel(); // Verifica se há algum problema com os níveis dos aquários.
+    check_PH_reator(); // Verifica o PH do reatpr de cálcio.
+    check_PH_aquario(); // Verifica o PH do aquário.
+    check_densidade(); // Verifica a densidade.
+    check_ORP(); // Verifica o ORP;
+    check_alarme(); // Verifica os alarmes.
 
     if (dispScreen == 0)
     {
-      mainScreen();    
+      mainScreen();  // Atualiza tela inicial.  
     }
+
     
     /*
      Serial.println("Dia da semana");  
      Serial.println(rtc.getDOWStr()); 
      
      Serial.println("Horario");
-     Serial.println(rtc.getTimeStr(FORMAT_LONG));
+     Serial.println(rtc.getTimeStr(FORMAT_LONG));*/
 
     Serial.print ("Memoria livre:");
     Serial.println (FreeRam());
 
-     Serial.println("Sensor 1:");    
+/*     Serial.println("Sensor 1:");    
      Serial.println(valor1);
      
      Serial.println("Sensor 2:");
@@ -115,29 +98,50 @@ void loop()
      Serial.println("Bomba3: desligada");
      }*/
   }
-  checktpa();
-  check_status();
-  logtempgraf();
-  logphagraf();
-  logphrgraf();
-  logdengraf();
-  logorpgraf();
+  checktpa(); // Verifica e executa a TPA automática.
+  check_status(); // Atualiza os valores para envio ao cosm.com.
+  logtempgraf(); // Grava temperatura no cartão SD.
+  logphagraf(); // Grava o PH do aquário no cartão SD.
+  logphrgraf(); // Grava o PH do reator de cálcio no cartão SD.
+  logdengraf(); // Grava densidade no cartão SD.
+  logorpgraf(); // Grava o ORP no cartão SD.
   
-  
-  if((Ethernet_Shield == true) && (tpa_em_andamento == false))
+   if(Ethernet_Shield == true)
   {
-    cosm ();
+    ether.packetLoop(ether.packetReceive()); // Envie e recebe os dados da internet.
+  }
+
+  if (myTouch.dataAvailable())  
+  { 
+    processMyTouch();  // Verifica se o LCD está sendo tocado e faz o processamento.
+  }
+
+  if(Stamps == true)
+  {
+    if((millis() - millis_antes) >= 120000) // Executa as funções a cada 2 minutos.
+    {
+    millis_antes = millis();        
+   parametros(); // Verifica os "stamps".
+    }
   }
   
-  if (millis() - logtempminutoantes > 900000ul) //Grava parametros a cada 15 minutos no cartao SD.
+  if((Ethernet_Shield == true) && (tpa_em_andamento == false)) // Condições para o envio de dados para o cosm.com.
+  {
+    cosm (); // Envia dados para o cosm.com.
+  }
+  
+  if (millis() - logtempminutoantes > 300000) // Grava parametros a cada 5 minutos no cartao SD.
   {
     logtempminutoantes = millis();
-    logparametros();
+    logparametros();// Grava todos parêmtros no cartão SD.
   }
-  check_dosagem_automatica_1();
-  check_dosagem_personalizada_1();
-  check_dosagem_automatica_2();
-  check_dosagem_personalizada_2();
-  check_dosagem_automatica_3();
-  check_dosagem_personalizada_3();
+  if(dosadoras == true) // Verifica e executa as dosagens.
+  {
+  check_dosagem_automatica_1(); // Dosadora 1 - Dosagem automática automática
+  check_dosagem_personalizada_1(); // Dosadora 1 - Dosagem personalizado
+  check_dosagem_automatica_2(); // Dosadora 2 - Dosagem automática
+  check_dosagem_personalizada_2(); // Dosadora 2 - Dosagem personalizado
+  check_dosagem_automatica_3(); // Dosadora 3 - Dosagem automática
+  check_dosagem_personalizada_3(); //Dosadora 3 - Dosagem personalizado
+  }
 } //-------------------end of main loop

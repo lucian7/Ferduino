@@ -22,20 +22,21 @@ void mainScreen(boolean refreshAll=false)
   {
     char bufferLP[16];
     LP.toCharArray(bufferLP, 16);
-    myGLCD.print(bufferLP, 98, 210); //Print Moon Phase Description to LCD
+    myGLCD.print("                 ", 98, 210); //Apaga descrição da fase lunar.
+    myGLCD.print(bufferLP, 98, 210); //Escreve descrição da fase lunar
 
     float lunarCycle = moonPhase(t.year,t.mon, t.date); //get a value for the lunar cycle
     if ((lunarCycle*100) < 1) //Print % of Full to LCD
     { 
-      myGLCD.print(" 0.00", 212, 210); 
+      myGLCD.print(" 0.00", 240, 210); 
     }
     else { 
-      myGLCD.printNumF(lunarCycle*100, 1, 242, 210);
+      myGLCD.printNumF(lunarCycle*100, 1, 240, 210);
     }
     myGLCD.print("% ILUMINADA", 280, 210);
     myGLCD.print("FASE LUNAR:", 10, 210);
   }
-  if ((blueLed!=bled_out) || refreshAll)       //refresh blue led displays
+  if ((blueLed != bled_out) || refreshAll)       //refresh blue led displays
   {
     blueLed = bled_out;
     ledLevel = LedToPercent(bled_out);
@@ -115,7 +116,7 @@ void mainScreen(boolean refreshAll=false)
   } 
 
   myGLCD.setColor(0, 0, 0);                      
-  myGLCD.fillRect(100, 62, 170, 80);               //Apagar temperatura
+  myGLCD.fillRect(100, 62, 173, 80);               //Apagar temperatura
   myGLCD.fillRect(113, 83, 170, 99);               //Apagar temp. dissipador
   myGLCD.fillRect(124, 102, 190, 119);               //Apagar PH do aquario
   myGLCD.fillRect(118, 121, 190, 137);               //Apagar PH do reator
@@ -131,7 +132,7 @@ void mainScreen(boolean refreshAll=false)
   myGLCD.fillRect(245, 178, 365, 195);              // Apagar noticia de TPA ligado/desligado
 
   setFont(LARGE, 0, 255, 0, 0, 0, 0);  
-  myGLCD.printNumF(tempC, 1, 102, 62); // Temperatura da agua
+  myGLCD.printNumF(tempC, 1, 102, 64); // Temperatura da agua
   myGLCD.printNumF(tempH, 1, 111, 83);   //Temperatura dissipador
   myGLCD.printNumF(PHA, 2, 122, 102);   //PH aqua
   myGLCD.printNumF( PHR, 2, 116, 121);  //PH reator

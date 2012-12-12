@@ -1,4 +1,4 @@
-void tempgScreen()//------------------------------------------------------------tela =11
+void tempgScreen()//------------------------------------------------------------ tela =11
 {
   int x, y, z, grafico;
   int16_t n;
@@ -7,8 +7,8 @@ void tempgScreen()//------------------------------------------------------------
   int j = 0;
   int i = 0;
   int k = 0;
-  float soma = 0.0f; // soma dos valores de todos os elementos
-  float media = 0.0f; // média dos valores
+  float soma = 0.0f; // Soma dos valores de todos os elementos
+  float media = 0.0f; // Média dos valores
   float linhaR;
   float linhaG;
   float linhaB;
@@ -42,10 +42,10 @@ void tempgScreen()//------------------------------------------------------------
   myGLCD.print("C", 20, 18);
   myGLCD.print("H", 290, 193);
 
-  myGLCD.drawLine(40, 30, 40, 190); //eixo y
-  myGLCD.drawLine(40, 190, 290, 190);  //eixo x
+  myGLCD.drawLine(40, 30, 40, 190); // Eixo y
+  myGLCD.drawLine(40, 190, 290, 190);  // Eixo x
 
-  myGLCD.setColor(64, 64, 64);  //malha
+  myGLCD.setColor(64, 64, 64);  // Malha
 
   //EIXO X
   for(int k=40; k<180; k+=15)
@@ -53,13 +53,13 @@ void tempgScreen()//------------------------------------------------------------
     myGLCD.drawLine(40, k, 290, k);
   }
 
-  //EIXOY
+  //EIXO Y
   for(int l=60; l<300; l+=20)
   {
     myGLCD.drawLine(l, 30, l, 190);
   }
 
-  linhaR =setTempC;   //  Linhas de comparacao
+  linhaR =setTempC;   //  Linhas de comparação
   linhaG =(setTempC+offTempC);
   linhaB = (setTempC-offTempC);
 
@@ -91,10 +91,10 @@ void tempgScreen()//------------------------------------------------------------
     z=190;
 
   myGLCD.setColor(255, 0, 0);
-  myGLCD.drawLine(40, x, 290, x);//Temperatura desejada
-  myGLCD.setColor(10, 10, 255);        //Variacao permitida
-  myGLCD.drawLine(40, y, 290, y); //variacao mais
-  myGLCD.drawLine(40, z, 290, z); //variacao menos*/
+  myGLCD.drawLine(40, x, 290, x);// Temperatura desejada
+  myGLCD.setColor(10, 10, 255);        // Variação permitida
+  myGLCD.drawLine(40, y, 290, y); // Variação mais
+  myGLCD.drawLine(40, z, 290, z); // Variação menos
 
   printButton("INICIO", iniC[0], iniC[1], iniC[2], iniC[3]); 
   printButton("MENU", menU[0], menU[1], menU[2], menU[3]);

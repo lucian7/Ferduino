@@ -15,7 +15,7 @@ int LedToPercent (int Led_out)        //returns LED output in %
 void LED_levels_output()
 {
   int sector, sstep, t1, t2 ;
-  int b_out, w_out;
+  int b_out, w_out, moon_out;
 
   if (min_cnt>=1440) {
     min_cnt=1;
@@ -39,18 +39,23 @@ void LED_levels_output()
     bled_out = check(&bled[t1], &bled[t2], sstep);
     wled_out = check(&wled[t1], &wled[t2], sstep);
   }
+     float lunarCycle = moonPhase(t.year, t.mon, t.date); //get a value for the lunar cycle
+     moonled_out = (MinI *(1 - lunarCycle)) + (MaxI * lunarCycle) + 0.5;  
 
-  if (BUCKPUCK) {
+  if (MeanWell == true) {
     b_out = bled_out;
     w_out = wled_out;
+    moon_out = moonled_out;
   } 
   else {
-    b_out = bled_out;
-    w_out = wled_out;
+    b_out = 255 - bled_out;
+    w_out = 255 - wled_out;
+    moon_out = 255 - moonled_out;
   }
 
   analogWrite(ledPinBlue, b_out);
   analogWrite(ledPinWhite, w_out);
+  analogWrite(ledPinMoon, moon_out);
 }
 
 int check( byte *pt1, byte *pt2, int lstep)

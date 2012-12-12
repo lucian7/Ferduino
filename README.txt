@@ -11,3 +11,7 @@ Em breve:
 Interface com o PCF8575; "Wavemaker"; Calibração das sondas de PH, ORP e densidade através da tela; Efeitos na iluminação como nuvens e relâmpagos; Medidor de consumo elétrico.
 
 Sugestões de novas funções são bem vindas.
+
+Veja os parâmetros em tempo real.
+
+https://cosm.com/feeds/69337

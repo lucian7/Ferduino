@@ -127,6 +127,13 @@ struct config_dos
 }
 dosaconfig;
 
+struct config_luz                        // Luz noturna
+{
+  int MaxI_t;
+  int MinI_t;
+} 
+luznoturna;
+
 void SaveLEDToEEPROM()                  
 {
   EEPROM.write(0, 123);         //to determine if data available in EEPROM
@@ -263,10 +270,16 @@ void Salvar_dosadora_EEPROM()
   EEPROM_writeAnything(244, dosaconfig);
 }
 
+void Salvar_luz_noturna_EEPROM()
+{
+  luznoturna.MinI_t = int(MinI);
+  luznoturna.MaxI_t = int(MaxI);
+  EEPROM_writeAnything(376, luznoturna);
+}
+
 void ReadFromEEPROM()
 {
   int k = EEPROM.read(0);
-  //char tempString[3];
   if (k==123) {
     for (int i=1; i<89; i++)  {
       wled[i] = EEPROM.read(i);
@@ -285,7 +298,6 @@ void ReadFromEEPROM()
 
 void lertpaEEPROM()
 {
-  //  char tpaString[9];
   EEPROM_readAnything(200, tpaconfig);  
   hora = tpaconfig.temphora;
   minuto = tpaconfig.tempminuto;
@@ -415,5 +427,11 @@ void ler_dosadora_EEPROM()
   hora_inicial_dosagem_automatica_3 = dosaconfig.hora_inicial_dosagem_automatica_3_temp;
   minuto_inicial_dosagem_automatica_3 = dosaconfig.minuto_inicial_dosagem_automatica_3_temp;
   hora_final_dosagem_automatica_3 = dosaconfig.hora_final_dosagem_automatica_3_temp;  
-  minuto_final_dosagem_automatica_3 = dosaconfig.minuto_final_dosagem_automatica_3_temp;
+  minuto_final_dosagem_automatica_3 = dosaconfig.minuto_final_dosagem_automatica_3_temp;  
+}
+void ler_luz_noturna_EEPROM()
+{
+  EEPROM_readAnything(376, luznoturna);  
+  MinI = luznoturna.MinI_t;
+  MaxI = luznoturna.MaxI_t;
 }

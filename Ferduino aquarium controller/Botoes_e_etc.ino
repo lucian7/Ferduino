@@ -37,7 +37,7 @@ const int manU[]= {10, 20, 150, 60};        // Dosagem manual
 const int autO[]= {10, 70, 150, 110};       //Dosagem automatica
 const int perS[]= {10, 120, 150, 160};      //Dosagem personalizada
 const int reV[]= {10, 170, 150, 210};     // rever cofig. dosagem personalizada
-//const int []= {170, 20, 310, 60};       
+const int atiV[]= {170, 20, 310, 60};    //Ativar/desativar dosadoras   
 //const int []= {170, 70, 310, 110};         
 //const int []= {170, 120, 310, 160};          
 

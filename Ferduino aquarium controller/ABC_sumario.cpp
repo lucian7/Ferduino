@@ -33,6 +33,12 @@ void check_dosagem_automatica_2()
 
 void check_dosagem_automatica_3()
 
+void check_dosagem_personalizada_1()
+
+void check_dosagem_personalizada_2()
+
+void check_dosagem_personalizada_3()
+
 //**********************************************************************************************
 //************************************* Aba EEPROM *********************************************
 //**********************************************************************************************
@@ -186,7 +192,17 @@ void solicitar_senha() case 30: do ProcessyMyTouch.
 
 void config_dosagem_personalizada_2(boolean refreshAll=false) case 31: do ProcessyMyTouch.
 
-void rever_dosagem_personalizada() case 32: do ProcessyMyTouch.
+void rever_configuracao_dosadoras() case 32: do ProcessyMyTouch.
+
+void rever_dosagem_automatica() case 33: do ProcessyMyTouch.
+
+void rever_dosagem_personalizada() case 34: do ProcessyMyTouch.
+
+void desativar_dosadoras(boolean refreshAll = false) case 35: do ProcessyMyTouch.
+
+void luz_noturna(boolean refreshAll=false) case 36: do ProcessyMyTouch.
+
+void menuScreen_2() case 37: do ProcessyMyTouch.
 
 //**********************************************************************************************
 //*********************************** Aba Parametros *******************************************

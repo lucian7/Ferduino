@@ -7,7 +7,6 @@ void writeCRLF(SdFile& f)
 
 void logtempgraf() //Grava dados no SD CARD para gerar  grafico de temperatura.
 {
-  t = rtc.getTime();
   char oldminuto1;
   oldminuto1 = time1;
   time1 = t.min;
@@ -41,9 +40,8 @@ void logtempgraf() //Grava dados no SD CARD para gerar  grafico de temperatura.
   digitalWrite (4, HIGH);  
 }
 
-void logphagraf() //Grava dados no SD CARD para gerar  grafico de PH do aquario.
+void logphagraf() //Grava dados no SD CARD para gerar  gráfico de PH do aquário.
 { 
-  t = rtc.getTime();
   char oldminuto2;
   oldminuto2 = time2;
   time2 = t.min;
@@ -76,9 +74,8 @@ void logphagraf() //Grava dados no SD CARD para gerar  grafico de PH do aquario.
   digitalWrite (4, HIGH); 
 }
 
-void logphrgraf() //Grava dados no SD CARD para gerar  grafico de PH do reator de calcio.
+void logphrgraf() //Grava dados no SD CARD para gerar  gráfico de PH do reator de calcio.
 {
-  t = rtc.getTime();
   char oldminuto3;
   oldminuto3 = time3;
   time3 = t.min;
@@ -113,7 +110,6 @@ void logphrgraf() //Grava dados no SD CARD para gerar  grafico de PH do reator d
 
 void logorpgraf() //Grava dados no SD CARD para gerar  grafico de ORP.
 {
-  t = rtc.getTime();
   char oldminuto4;
   oldminuto4 = time4;
   time4 = t.min;
@@ -149,7 +145,6 @@ void logorpgraf() //Grava dados no SD CARD para gerar  grafico de ORP.
 
 void logdengraf() //Grava dados no SD CARD para gerar  grafico de PH do aquario.
 {
-  t = rtc.getTime();
   char oldminuto5;
   oldminuto5 = time5;
   time5  = t.min;
@@ -185,8 +180,6 @@ void logdengraf() //Grava dados no SD CARD para gerar  grafico de PH do aquario.
 
 void logparametros() //Grava parametros no SD CARD para consultas posteriores
 {
-  t = rtc.getTime();
-
   digitalWrite (4, LOW);
 
   file.open(&root, "LOGPAR.TXT", O_CREAT | O_APPEND | O_WRITE);
