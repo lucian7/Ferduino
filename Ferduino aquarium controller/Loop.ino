@@ -20,7 +20,7 @@ void loop()
   {
     previousMillis = millis();  
     checkTempC(); // Verifica as temperaturas.
-    min_cnt= (t.hour*60)+t.hour; // Atualiza o intervalo para determinar a potência dos leds.
+    min_cnt= NumMins(t.hour,t.min); // Atualiza o intervalo para determinar a potência dos leds.
     LED_levels_output(); // Atualiza a potência de saída dos leds
     reposicao_agua_doce(); // Verifica se há a necessidade reposição da água doce.
     check_nivel(); // Verifica se há algum problema com os níveis dos aquários.
@@ -29,6 +29,7 @@ void loop()
     check_densidade(); // Verifica a densidade.
     check_ORP(); // Verifica o ORP;
     check_alarme(); // Verifica os alarmes.
+    check_temporizadores(); // Ativa ou desativa os timers.
 
     if (dispScreen == 0)
     {

@@ -39,12 +39,14 @@
 #include <EtherCard.h>
 
 //****************************************************************************************************
-//***************** Sensore de temperatura ***********************************************************
+//***************** Sensores de temperatura **********************************************************
 //****************************************************************************************************
 OneWire OneWireBus(47);                   //Sensor de temperatura da água e dissipador ligados ao pino 47.
 DallasTemperature sensors(&OneWireBus);  // Pass our oneWire reference to Dallas Temperature. 
-DeviceAddress sensor_agua= {0x28, 0x9C, 0xA9, 0xAA, 0x03, 0x00, 0x00, 0x44 }; // Atribui os endereços dos sensores de temperatura. Adicionar / Alterar os endereços conforme necessário.
-DeviceAddress sensor_dissipador = {0x28, 0xE1, 0x96, 0xAA, 0x03, 0x00, 0x00, 0x7D }; // Atribui os endereços dos sensores de temperatura. Adicionar / Alterar os endereços conforme necessário.
+DeviceAddress sensor_agua= {
+  0x28, 0x9C, 0xA9, 0xAA, 0x03, 0x00, 0x00, 0x44 }; // Atribui os endereços dos sensores de temperatura. Adicionar / Alterar os endereços conforme necessário.
+DeviceAddress sensor_dissipador = {
+  0x28, 0xE1, 0x96, 0xAA, 0x03, 0x00, 0x00, 0x7D }; // Atribui os endereços dos sensores de temperatura. Adicionar / Alterar os endereços conforme necessário.
 
 //****************************************************************************************************
 //****************** Variáveis de textos e fontes ****************************************************
@@ -58,7 +60,7 @@ extern uint8_t BigFont[];     // Declara que fontes vamos usar
 //****************** Define funções dos pinos digitais e analógicos **********************************
 //****************************************************************************************************
 
-// Pinos disponíveis [PWM (44,45,46)TX/RX(14,15,18,19) ANALÓGICOS(A6, A7, A8)]
+// Pinos disponíveis [TX/RX(14,15,18,19) ANALÓGICOS(A6)]
 
 const int ledPinBlue = 8;      // Pino que liga os leds azuis
 const int ledPinWhite = 9;     // Pino que liga os leds brancos
@@ -84,6 +86,11 @@ const int multiplexadorS1Pin = A15; // Pino S1 de controle dos stamps
 const int dosadora1 = 10;     // Bomba dosadora 1
 const int dosadora2 = 11;     // Bomba dosadora 2
 const int dosadora3 = 12;     // Bomba dosadora 3
+const int temporizador1 = 44;         //Pino que liga o timer 1.
+const int temporizador2 = 45;         //Pino que liga o timer 2.
+const int temporizador3 = 46;         //Pino que liga o timer 3.
+const int temporizador4 = A7;         //Pino que liga o timer 4.
+const int temporizador5 = A8;         //Pino que liga o timer 5.
 
 //*******************************************************************************************************
 //********************** Funções do RTC ********************************************************************
@@ -188,13 +195,13 @@ boolean ORPflag=0;          // Sinaliza que o ozonizador esta ligado / desligado
 float ORPAflag = 0;        // Sinaliza que a ORP esta fora do especificado
 
 //*****************************************************************************************
-//************************ Variaveis de controle de velocidade dos coolers ****************
+//************************ Variáveis de controle de velocidade dos coolers ****************
 //*****************************************************************************************
 const int HtempMin = 30;    // Declara a temperatura para iniciar o funcionamento das ventoinhas do dissipador 
 const int HtempMax = 40;    // Declara que as ventoinhas devem estar em sua velocidade máxima quando o dissipador estiver com 40°c
 
 //*****************************************************************************************
-//************************ Variavel de controle da temperatura do dissipador **************
+//************************ Variável de controle da temperatura do dissipador **************
 //*****************************************************************************************
 float tempH = 0;            // Temperatura do dissipador
 
@@ -220,7 +227,7 @@ float PHA2beO;
 float PHA2beA;
 
 //*****************************************************************************************
-//************************ Variaveis temporarias de controle da ORP ***********************
+//************************ Variáveis temporárias de controle da ORP ***********************
 //*****************************************************************************************
 float ORP2beS;               //orp temporaria
 float ORP2beO;
@@ -291,7 +298,7 @@ int temp2sabado;
 int temp2domingo;
 
 //****************************************************************************************
-//*********************** Variaveis de controle das funções que utilizam o cartao SD *****
+//*********************** Variáveis de controle das funções que utilizam o cartao SD *****
 //****************************************************************************************
 unsigned long logtempminutoantes = 0;  // Variável que controla o tempo para gravação dos parâmetros no cartão SD 
 const int chipselect = 4;            // Para utilizar o Sd card do LCD altere para 53
@@ -328,16 +335,19 @@ int niveis_status;
 int tpa_status;
 
 //*****************************************************************************************
-//************************* Funcoes ethernet shield ***************************************
+//************************* Funções do ethernet shield ************************************
 //*****************************************************************************************
 boolean Ethernet_Shield = true; // Altere para "false" caso não tenha um Ethernet Shield conectado ao Arduino.
 
 #define FEED    "xxxxx"               // Número do projeto(cosm.com).
  #define APIKEY  "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" //Senha do projeto(cosm.com)
 
-static byte mymac[] = {0x54, 0x55, 0x58, 0x10, 0x00, 0x26}; // Este mac deve ser único na rede.
-static byte myip[] = {192,168,2,105};
-static byte gwip[] = {192,168,2,1 };
+static byte mymac[] = {
+  0x54, 0x55, 0x58, 0x10, 0x00, 0x26}; // Este mac deve ser único na rede.
+static byte myip[] = {
+  192,168,2,105};
+static byte gwip[] = {
+  192,168,2,1 };
 char website[] PROGMEM = "api.cosm.com";
 byte Ethernet::buffer[500];
 Stash stash;
@@ -359,7 +369,7 @@ short ec=3; // Y3
 int done = 0;
 
 //*****************************************************************************************
-//************************** Variáveis da solicitacao de senha ****************************
+//************************** Variáveis da solicitação de senha ****************************
 //*****************************************************************************************
 char stCurrent[7]="";
 char limpar_senha [7] = "";
@@ -540,6 +550,68 @@ int hora_final_dosagem_automatica_3_temp2;
 int minuto_final_dosagem_automatica_3_temp2;
 
 //*****************************************************************************************
+//************************** Variáveis dos timers *****************************************
+//*****************************************************************************************
+boolean temporizador_1 = false;
+boolean temporizador_2 = false;
+boolean temporizador_3 = false;
+boolean temporizador_4 = false;
+boolean temporizador_5 = false;
+int temporizador_1_ativado = 0;
+int temporizador_2_ativado = 0;
+int temporizador_3_ativado = 0;
+int temporizador_4_ativado= 0;
+int temporizador_5_ativado= 0;
+int on1_minuto = 0;
+int on1_hora = 0;
+int on2_minuto = 0;
+int on2_hora = 0;
+int on3_minuto = 0;
+int on3_hora = 0;
+int on4_minuto = 0;
+int on4_hora = 0;
+int on5_minuto = 0;
+int on5_hora = 0;
+int off1_minuto = 0;
+int off1_hora = 0;
+int off2_minuto = 0;
+int off2_hora = 0;
+int off3_minuto = 0;
+int off3_hora = 0;
+int off4_minuto = 0;
+int off4_hora = 0;
+int off5_minuto = 0;
+int off5_hora= 0;
+
+//*****************************************************************************************
+//************************** Variáveis temporárias dos timers *****************************
+//*****************************************************************************************
+int on1_minuto_temp2;
+int on1_hora_temp2;
+int on2_minuto_temp2;
+int on2_hora_temp2;
+int on3_minuto_temp2;
+int on3_hora_temp2;
+int on4_minuto_temp2;
+int on4_hora_temp2;
+int on5_minuto_temp2;
+int on5_hora_temp2;
+int off1_minuto_temp2;
+int off1_hora_temp2;
+int off2_minuto_temp2;
+int off2_hora_temp2;
+int off3_minuto_temp2;
+int off3_hora_temp2;
+int off4_minuto_temp2;
+int off4_hora_temp2;
+int off5_minuto_temp2;
+int off5_hora_temp2;
+int temporizador_1_ativado_temp2;
+int temporizador_2_ativado_temp2;
+int temporizador_3_ativado_temp2;
+int temporizador_4_ativado_temp2;
+int temporizador_5_ativado_temp2;
+//*****************************************************************************************
 //************************** Variáveis de controle da potência dos leds *******************
 //*****************************************************************************************
 byte bled[96] = {                       // Potência de saída dos leds azuis 255 = 100% da potência
@@ -572,5 +644,6 @@ byte wled[96] = {                         //Potência de saída dos leds brancos
   0, 0, 0, 0, 0, 0, 0, 0          // 22 a 24
 };
 byte tled[96];
+
 
 

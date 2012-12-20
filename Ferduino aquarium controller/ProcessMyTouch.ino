@@ -7,14 +7,6 @@ void processMyTouch()
   if ((x>=iniC[0]) && (x<=iniC[2]) && (y>=iniC[1]) && (y<=iniC[3]) && (dispScreen!=0) && (LEDtestTick == false))  // volta ao inicio
   {
     waitForIt(iniC[0], iniC[1], iniC[2], iniC[3]);
-    modo_manual = false;
-    modo_automatico = false;
-    modo_personalizado = false;
-    modo_calibrar = false;
-    dosadora_1_selecionada = false;
-    dosadora_2_selecionada = false;
-    dosadora_3_selecionada = false; 
-
     dispScreen=0;
     clearScreen();
     mainScreen(true);   
@@ -470,7 +462,6 @@ void processMyTouch()
         {
           waitForIt(menU[0], menU[1], menU[2], menU[3]);
           dispScreen=1;
-          clearScreen();
           clearScreen();
           menuScreen(); 
         }
@@ -1587,13 +1578,6 @@ void processMyTouch()
         dispScreen = 1;
         clearScreen();
         menuScreen(); 
-        modo_manual = false;
-        modo_automatico = false;
-        modo_personalizado = false;
-        modo_calibrar = false;
-        dosadora_1_selecionada = false;
-        dosadora_2_selecionada = false;
-        dosadora_3_selecionada = false; 
       }
       if ((x>=volT[0]) && x<=volT[2] && (y>=volT[1]) && (y<=volT[3]))           // volta a tela de escolha da dosadora
       {
@@ -1601,13 +1585,6 @@ void processMyTouch()
         dispScreen = 8;
         clearScreen();
         menu_dosadoras();
-        modo_manual = false;
-        modo_automatico = false;
-        modo_personalizado = false;
-        modo_calibrar = false;
-        dosadora_1_selecionada = false;
-        dosadora_2_selecionada = false;
-        dosadora_3_selecionada = false; 
       }
       break;
 
@@ -1674,6 +1651,7 @@ void processMyTouch()
       }    
       if ((x>=salV[0]) && x<=salV[2] && (y>=salV[1]) && (y<=salV[3]))
       {
+        waitForIt(salV[0], salV[1], salV[2], salV[3]); // Função salvar
         if(dosadora_1_selecionada == true)
         {
           fator_calib_dosadora_1 = fator_calib_dosadora_1_temp2;
@@ -2712,13 +2690,6 @@ void processMyTouch()
         dispScreen = 1;
         clearScreen();
         menuScreen(); 
-        modo_manual = false;
-        modo_automatico = false;
-        modo_personalizado = false;
-        modo_calibrar = false;
-        dosadora_1_selecionada = false;
-        dosadora_2_selecionada = false;
-        dosadora_3_selecionada = false;
       }
       if ((x>=volT[0]) && x<=volT[2] && (y>=volT[1]) && (y<=volT[3]))           // Volta a tela altera configuracao das dosadoras
       {
@@ -3267,13 +3238,6 @@ void processMyTouch()
         dispScreen = 1;
         clearScreen();
         menuScreen(); 
-        modo_manual = false;
-        modo_automatico = false;
-        modo_personalizado = false;
-        modo_calibrar = false;
-        dosadora_1_selecionada = false;
-        dosadora_2_selecionada = false;
-        dosadora_3_selecionada = false;
       }
       if ((y >= anT[1]) && (y <= anT[3]) && (x >= anT[0]) && (x <= anT[2])) // Volta ao menu dosagem personalizada
       {
@@ -4011,7 +3975,7 @@ void processMyTouch()
         rever_configuracao_dosadoras();
       }
       break;
-      case 35:
+    case 35:
       if ((x>=menU[0]) && (x<=menU[2]) && (y>=menU[1]) && (y<=menU[3]))           // volta ao menu
       {
         waitForIt(menU[0], menU[1], menU[2], menU[3]);
@@ -4026,46 +3990,46 @@ void processMyTouch()
         clearScreen();
         menu_dosadoras();
       }
-       if ((x >= 100) && (x <= 220) && (y >= 45) && (y <= 85))           //Ativar/desatiavr dosadora 1
+      if ((x >= 100) && (x <= 220) && (y >= 45) && (y <= 85))           //Ativar/desatiavr dosadora 1
       {
         waitForIt(100, 45, 220, 85);
-       
+
         if(ativar_desativar_1 == 1)
         {
-        ativar_desativar_1 = 0;
-        desativar_dosadoras();
-        }
-        else
-        {
-         desativar_dosadoras(true);
-        }          
-      }
-       if ((x >= 100) && (x <= 220) && (y >= 115) && (y <= 155))           //Ativar/desatiavr dosadora 2
-      {
-        waitForIt(100, 115, 220, 155);
-       
-        if(ativar_desativar_2 == 1)
-        {
-        ativar_desativar_2 = 0;
-        desativar_dosadoras();
+          ativar_desativar_1 = 0;
+          desativar_dosadoras();
         }
         else
         {
           desativar_dosadoras(true);
         }          
       }
-       if ((x >= 100) && (x <= 220) && (y >= 185) && (y <= 225))           //Ativar/desatiavr dosadora 3
+      if ((x >= 100) && (x <= 220) && (y >= 115) && (y <= 155))           //Ativar/desatiavr dosadora 2
       {
-        waitForIt(100, 185, 220, 225);
-       
-        if(ativar_desativar_3 == 1)
+        waitForIt(100, 115, 220, 155);
+
+        if(ativar_desativar_2 == 1)
         {
-        ativar_desativar_3 = 0;
-        desativar_dosadoras();
+          ativar_desativar_2 = 0;
+          desativar_dosadoras();
         }
         else
         {
-         desativar_dosadoras(true);
+          desativar_dosadoras(true);
+        }          
+      }
+      if ((x >= 100) && (x <= 220) && (y >= 185) && (y <= 225))           //Ativar/desatiavr dosadora 3
+      {
+        waitForIt(100, 185, 220, 225);
+
+        if(ativar_desativar_3 == 1)
+        {
+          ativar_desativar_3 = 0;
+          desativar_dosadoras();
+        }
+        else
+        {
+          desativar_dosadoras(true);
         }          
       }
       if ((x>=salV[0]) && (x<=salV[2]) && (y>=salV[1]) && (y<=salV[3]))           //Salvar alterações
@@ -4073,18 +4037,18 @@ void processMyTouch()
         waitForIt(salV[0], salV[1], salV[2], salV[3]);
         if(ativar_desativar_1 == 0)
         {
-        modo_personalizado_on_1 = 0;
-        modo_automatico_on_1 = 0;
+          modo_personalizado_on_1 = 0;
+          modo_automatico_on_1 = 0;
         }
         if(ativar_desativar_2 == 0)
         {
-        modo_personalizado_on_2 = 0;
-        modo_automatico_on_2 = 0;
+          modo_personalizado_on_2 = 0;
+          modo_automatico_on_2 = 0;
         }
         if(ativar_desativar_3 == 0)
         {
-        modo_personalizado_on_3 = 0;
-        modo_automatico_on_3 = 0;
+          modo_personalizado_on_3 = 0;
+          modo_automatico_on_3 = 0;
         }
         Salvar_dosadora_EEPROM(); 
         dispScreen = 0;
@@ -4092,8 +4056,8 @@ void processMyTouch()
         mainScreen(true);       
       }
       break;
-      case 36:
-       if ((x>=prOK[0]) && (x<=prOK[2]) && (y>=prOK[1]) && (y<=prOK[3]))       //Funcao salvar
+    case 36:
+      if ((x>=prOK[0]) && (x<=prOK[2]) && (y>=prOK[1]) && (y<=prOK[3]))       //Funcao salvar
       {
         waitForIt(prOK[0], prOK[1], prOK[2], prOK[3]);
         MaxI = tMaxI;
@@ -4119,7 +4083,7 @@ void processMyTouch()
             myGLCD.fillRect (128, 40, 180, 56);//Limpar texto
             luz_noturna();
           }
-         
+
           if ((y>=almM[1]) && (y<=almM[3]))                        //press alarm minus
           {
             waitForIt(almM[0], almM[1], almM[2], almM[3]);
@@ -4161,7 +4125,7 @@ void processMyTouch()
             luz_noturna();
           }
         }
-        if ((x>=menU[0]) && x<=menU[2] && (y>=menU[1]) && (y<=menU[3]))           // volta ao menu
+        if ((x>=menU[0]) && x<=menU[2] && (y>=menU[1]) && (y<=menU[3]))           // volta ao menu 1
         {
           waitForIt(menU[0], menU[1], menU[2], menU[3]);
           dispScreen=37;
@@ -4170,27 +4134,822 @@ void processMyTouch()
         } 
       }
       break;
-      case 37:
-         if ((x>=menU[0]) && x<=menU[2] && (y>=menU[1]) && (y<=menU[3]))           // Volta ao menu 1
+    case 37: // -------------------------------- Menu 2 -------------------------------------------------------------- 
+      if ((x>=menU[0]) && (x<=menU[2]) && (y>=menU[1]) && (y<=menU[3]))           // Volta ao menu 1
+      {
+        waitForIt(menU[0], menU[1], menU[2], menU[3]);
+        dispScreen=1;
+        clearScreen();
+        menuScreen();
+      }
+      if ((x>=tanD[0]) && (x<=tanD[2]) && (y>=tanD[1]) && (y<=tanD[3]))           // Luz Noturna
+      {
+        waitForIt(tanD[0], tanD[1], tanD[2], tanD[3]);
+        dispScreen=36;
+        clearScreen();
+        luz_noturna(true);
+      }
+      if ((x>=tesT[0]) && (x<=tesT[2]) && (y>=tesT[1]) && (y<=tesT[3]))           // Timers
+      {
+        waitForIt(tesT[0], tesT[1], tesT[2], tesT[3]);
+        dispScreen=38;
+        clearScreen();
+        TimerScreen();
+      }
+      break;
+    case 38:
+      if ((x>=menU[0]) && x<=menU[2] && (y>=menU[1]) && (y<=menU[3]))           // Volta ao menu 2
+      {
+        waitForIt(menU[0], menU[1], menU[2], menU[3]);
+        dispScreen=37;
+        clearScreen();
+        menuScreen_2();
+      }
+      if ((x >= 7) && (x <= 56) && (y >= 22) && (y <= 238))           // Timer 1 
+      {
+        waitForIt(7, 22, 56, 238);
+        temporizador_1 = true;
+        temporizador_2 = false;
+        temporizador_3 = false;
+        temporizador_4 = false;
+        temporizador_5 = false;
+        dispScreen=39;
+        clearScreen();
+        config_timer(true);
+      }
+      if ((x >= 71) && (x <= 120) && (y >= 22) && (y <= 238))           // Timer 2 
+      {
+        waitForIt(71, 22, 120, 238);
+        temporizador_1 = false;
+        temporizador_2 = true;
+        temporizador_3 = false;
+        temporizador_4 = false;
+        temporizador_5 = false;
+        dispScreen=39;
+        clearScreen();
+        config_timer(true);
+      }
+      if ((x >= 135) && (x <= 184) && (y >= 22) && (y <= 238))           // Timer 3 
+      {
+        waitForIt(135, 22, 184, 238);
+        temporizador_1 = false;
+        temporizador_2 = false;
+        temporizador_3 = true;
+        temporizador_4 = false;
+        temporizador_5 = false;
+        dispScreen=39;
+        clearScreen();
+        config_timer(true);
+      }
+      if ((x >= 199) && (x <= 248) && (y >= 22) && (y <= 238))           // Timer 4 
+      {
+        waitForIt(199, 22, 248, 238);
+        temporizador_1 = false;
+        temporizador_2 = false;
+        temporizador_3 = false;
+        temporizador_4 = true;
+        temporizador_5 = false;
+        dispScreen=39;
+        clearScreen();
+        config_timer(true);
+      } 
+      if ((x >= 263) && (x <= 312) && (y >= 22) && (y <= 238))           // Timer 5 
+      {
+        waitForIt(263, 22, 312, 238);
+        temporizador_1 = false;
+        temporizador_2 = false;
+        temporizador_3 = false;
+        temporizador_4 = false;
+        temporizador_5 = true;
+        dispScreen=39;
+        clearScreen();
+        config_timer(true);
+      }       
+      break;
+    case 39:
+      if ((x>=menU[0]) && x<=menU[2] && (y>=menU[1]) && (y<=menU[3]))           // Volta ao menu 2
+      {
+        waitForIt(menU[0], menU[1], menU[2], menU[3]);   
+        dispScreen=37;
+        clearScreen();
+        menuScreen_2();
+      }
+      if ((x>=volT[0]) && x<=volT[2] && (y>=volT[1]) && (y<=volT[3]))           // Selecionar timer
+      {
+        waitForIt(volT[0], volT[1], volT[2], volT[3]);
+        dispScreen=38;
+        clearScreen();
+        TimerScreen(); 
+      } 
+      if(temporizador_1 == true)
+      {
+        if ((x>=salV[0]) && x<=salV[2] && (y>=salV[1]) && (y<=salV[3]))
         {
-          waitForIt(menU[0], menU[1], menU[2], menU[3]);
-          dispScreen=1;
-          clearScreen();
-          menuScreen();
+          waitForIt(salV[0], salV[1], salV[2], salV[3]); // Função salvar
+          if((on1_hora_temp2 == off1_hora_temp2) && (on1_minuto_temp2 >= off1_minuto_temp2))
+          {
+            setFont(SMALL, 255, 0, 0, 0, 0, 0);
+            myGLCD.print("HORA", 20, 205);
+            myGLCD.print("ERRADA!", 20, 222);
+          }
+
+          if(off1_hora_temp2 < on1_hora_temp2)
+          {
+            setFont(SMALL, 255, 0, 0, 0, 0, 0);
+            myGLCD.print("HORA", 20, 205);
+            myGLCD.print("ERRADA!", 20, 222);
+          }
+
+          if((on1_hora_temp2 == off1_hora_temp2) && (off1_minuto_temp2 > on1_minuto_temp2))
+          {
+            dispScreen=0;
+            clearScreen();
+            mainScreen(true);
+            on1_minuto = on1_minuto_temp2;
+            on1_hora = on1_hora_temp2;
+            off1_minuto = off1_minuto_temp2;
+            off1_hora = off1_hora_temp2;
+            temporizador_1_ativado = temporizador_1_ativado_temp2;
+            salvar_timers_EEPROM();
+          }
+          if(on1_hora_temp2 < off1_hora_temp2)
+          {
+            dispScreen=0;
+            clearScreen();
+            mainScreen(true);
+            on1_minuto = on1_minuto_temp2;
+            on1_hora = on1_hora_temp2;
+            off1_minuto = off1_minuto_temp2;
+            off1_hora = off1_hora_temp2;
+            temporizador_1_ativado = temporizador_1_ativado_temp2;
+            salvar_timers_EEPROM();
+          }
         }
-        if ((x>=tanD[0]) && x<=tanD[2] && (y>=tanD[1]) && (y<=tanD[3]))           // Luz Noturna
+        if ((x >= 21) && (x <= 65) && (y >= 45) && (y <= 88))           // Hora ligar mais 
         {
-          waitForIt(tanD[0], tanD[1], tanD[2], tanD[3]);
-          dispScreen=36;
-          clearScreen();
-          luz_noturna(true);
+          waitForIt(21, 45, 65, 88);
+          on1_hora_temp2 += 1;
+          if(on1_hora_temp2 > 23)
+          {
+            on1_hora_temp2 = 0;
+          }
+          config_timer();
+        } 
+        if ((x >= 21) && (x <= 65) && (y >= 135) && (y <= 178))           // Hora ligar menos
+        {
+          waitForIt(21, 45, 65, 88);
+          on1_hora_temp2 -= 1;
+          if(on1_hora_temp2 < 0)
+          {
+            on1_hora_temp2 = 23;
+          }
+          config_timer();
+        } 
+
+        if ((x >= 89) && (x <= 133) && (y >= 45) && (y <= 88))           // Minuto ligar mais 
+        {
+          waitForIt(89, 45, 133, 88);
+          on1_minuto_temp2 += 1;
+          if(on1_minuto_temp2 > 59)
+          {
+            on1_minuto_temp2 = 0;
+          }
+          config_timer();
+        } 
+        if ((x >= 89) && (x <= 133) && (y >= 135) && (y <= 178))           // Minuto ligar menos
+        {
+          waitForIt(89, 135, 133, 178);
+          on1_minuto_temp2 -= 1;
+          if(on1_minuto_temp2 < 0)
+          {
+            on1_minuto_temp2 = 59;
+          }
+          config_timer();
         }
-        
-      
+        if ((x >= 187) && (x <= 231) && (y >= 45) && (y <= 88))           // Hora desligar mais 
+        {
+          waitForIt(187, 45, 231, 88);
+          off1_hora_temp2 += 1;
+          if(off1_hora_temp2 > 23)
+          {
+            off1_hora_temp2 = 0;
+          }
+          config_timer();
+        } 
+        if ((x >= 187) && (x <= 231) && (y >= 135) && (y <= 178))           // Hora desligar menos
+        {
+          waitForIt(187, 135, 231, 178);
+          off1_hora_temp2 -= 1;
+          if(off1_hora_temp2 < 0)
+          {
+            off1_hora_temp2 = 23;
+          }
+          config_timer();
+        } 
+
+        if ((x >= 255) && (x <= 299) && (y >= 45) && (y <= 88))           // Minuto desligar mais 
+        {
+          waitForIt(255, 45, 299, 88);
+          off1_minuto_temp2 += 1;
+          if(off1_minuto_temp2 > 59)
+          {
+            off1_minuto_temp2 = 0;
+          }
+          config_timer();
+        } 
+        if ((x >= 255) && (x <= 299) && (y >= 135) && (y <= 178))           // Minuto desligar menos
+        {
+          waitForIt(255, 135, 299, 178);
+          off1_minuto_temp2 -= 1;
+          if(off1_minuto_temp2 < 0)
+          {
+            off1_minuto_temp2 = 59;
+          }
+          config_timer();
+        }
+        if ((x>=domI[0]-20) && (x<=domI[2]+20) && (y>=domI[1]) && (y<=domI[3]))           // Ativar / desativar timer
+        {
+          waitForIt(domI[0]-20, domI[1], domI[2]+20, domI[3]);
+          if(temporizador_1_ativado_temp2 == 0)
+          {
+            temporizador_1_ativado_temp2 = 1;
+          }
+          else
+          {
+            temporizador_1_ativado_temp2 = 0;
+          }
+          config_timer();
+        }  
+      }
+      if(temporizador_2 == true)
+      {
+        if ((x>=salV[0]) && x<=salV[2] && (y>=salV[1]) && (y<=salV[3]))
+        {
+          waitForIt(salV[0], salV[1], salV[2], salV[3]); // Função salvar
+
+          if((on2_hora_temp2 == off2_hora_temp2) && (on2_minuto_temp2 >= off2_minuto_temp2))
+          {
+            setFont(SMALL, 255, 0, 0, 0, 0, 0);
+            myGLCD.print("HORA", 20, 205);
+            myGLCD.print("ERRADA!", 20, 222);
+          }
+
+          if(off2_hora_temp2 < on2_hora_temp2)
+          {
+            setFont(SMALL, 255, 0, 0, 0, 0, 0);
+            myGLCD.print("HORA", 20, 205);
+            myGLCD.print("ERRADA!", 20, 222);
+          }
+
+          if((on2_hora_temp2 == off2_hora_temp2) && (off2_minuto_temp2 > on2_minuto_temp2))
+          {
+            dispScreen=0;
+            clearScreen();
+            mainScreen(true);
+            on2_minuto = on2_minuto_temp2;
+            on2_hora = on2_hora_temp2;
+            off2_minuto = off2_minuto_temp2;
+            off2_hora = off2_hora_temp2;
+            temporizador_2_ativado = temporizador_2_ativado_temp2;
+            salvar_timers_EEPROM();
+          }
+          if(on2_hora_temp2 < off2_hora_temp2)
+          {
+            dispScreen=0;
+            clearScreen();
+            mainScreen(true);
+            on2_minuto = on2_minuto_temp2;
+            on2_hora = on2_hora_temp2;
+            off2_minuto = off2_minuto_temp2;
+            off2_hora = off2_hora_temp2;
+            temporizador_2_ativado = temporizador_2_ativado_temp2;
+            salvar_timers_EEPROM();
+          }
+        }
+
+        if ((x >= 21) && (x <= 65) && (y >= 45) && (y <= 88))           // Hora ligar mais 
+        {
+          waitForIt(21, 45, 65, 88);
+          on2_hora_temp2 += 1;
+          if(on2_hora_temp2 > 23)
+          {
+            on2_hora_temp2 = 0;
+          }
+          config_timer();
+        } 
+        if ((x >= 21) && (x <= 65) && (y >= 135) && (y <= 178))           // Hora ligar menos
+        {
+          waitForIt(21, 45, 65, 88);
+          on2_hora_temp2 -= 1;
+          if(on2_hora_temp2 < 0)
+          {
+            on2_hora_temp2 = 23;
+          }
+          config_timer();
+        } 
+
+        if ((x >= 89) && (x <= 133) && (y >= 45) && (y <= 88))           // Minuto ligar mais 
+        {
+          waitForIt(89, 45, 133, 88);
+          on2_minuto_temp2 += 1;
+          if(on2_minuto_temp2 > 59)
+          {
+            on2_minuto_temp2 = 0;
+          }
+          config_timer();
+        } 
+        if ((x >= 89) && (x <= 133) && (y >= 135) && (y <= 178))           // Minuto ligar menos
+        {
+          waitForIt(89, 135, 133, 178);
+          on2_minuto_temp2 -= 1;
+          if(on2_minuto_temp2 < 0)
+          {
+            on2_minuto_temp2 = 59;
+          }
+          config_timer();
+        }
+        if ((x >= 187) && (x <= 231) && (y >= 45) && (y <= 88))           // Hora desligar mais 
+        {
+          waitForIt(187, 45, 231, 88);
+          off2_hora_temp2 += 1;
+          if(off2_hora_temp2 > 23)
+          {
+            off2_hora_temp2 = 0;
+          }
+          config_timer();
+        } 
+        if ((x >= 187) && (x <= 231) && (y >= 135) && (y <= 178))           // Hora desligar menos
+        {
+          waitForIt(187, 135, 231, 178);
+          off2_hora_temp2 -= 1;
+          if(off2_hora_temp2 < 0)
+          {
+            off2_hora_temp2 = 23;
+          }
+          config_timer();
+        } 
+
+        if ((x >= 255) && (x <= 299) && (y >= 45) && (y <= 88))           // Minuto desligar mais 
+        {
+          waitForIt(255, 45, 299, 88);
+          off2_minuto_temp2 += 1;
+          if(off2_minuto_temp2 > 59)
+          {
+            off2_minuto_temp2 = 0;
+          }
+          config_timer();
+        } 
+        if ((x >= 255) && (x <= 299) && (y >= 135) && (y <= 178))           // Minuto desligar menos
+        {
+          waitForIt(255, 135, 299, 178);
+          off2_minuto_temp2 -= 1;
+          if(off2_minuto_temp2 < 0)
+          {
+            off2_minuto_temp2 = 59;
+          }
+          config_timer();
+        }
+        if ((x>=domI[0]-20) && (x<=domI[2]+20) && (y>=domI[1]) && (y<=domI[3]))           // Ativar / desativar timer
+        {
+          waitForIt(domI[0]-20, domI[1], domI[2]+20, domI[3]);
+          if(temporizador_2_ativado_temp2 == 0)
+          {
+            temporizador_2_ativado_temp2 = 1;
+          }
+          else
+          {
+            temporizador_2_ativado_temp2 = 0;
+          }
+          config_timer();
+        }  
+      }   
+      if(temporizador_3 == true)
+      {
+        if ((x>=salV[0]) && x<=salV[2] && (y>=salV[1]) && (y<=salV[3]))
+        {
+          waitForIt(salV[0], salV[1], salV[2], salV[3]); // Função salvar          
+
+          if((on3_hora_temp2 == off3_hora_temp2) && (on3_minuto_temp2 >= off3_minuto_temp2))
+          {
+            setFont(SMALL, 255, 0, 0, 0, 0, 0);
+            myGLCD.print("HORA", 20, 205);
+            myGLCD.print("ERRADA!", 20, 222);
+          }
+
+          if(off3_hora_temp2 < on3_hora_temp2)
+          {
+            setFont(SMALL, 255, 0, 0, 0, 0, 0);
+            myGLCD.print("HORA", 20, 205);
+            myGLCD.print("ERRADA!", 20, 222);
+          }
+
+          if((on3_hora_temp2 == off3_hora_temp2) && (off3_minuto_temp2 > on3_minuto_temp2))
+          {
+            dispScreen=0;
+            clearScreen();
+            mainScreen(true);
+            on3_minuto = on3_minuto_temp2;
+            on3_hora = on3_hora_temp2;
+            off3_minuto = off3_minuto_temp2;
+            off3_hora = off3_hora_temp2;
+            temporizador_3_ativado = temporizador_3_ativado_temp2;
+            salvar_timers_EEPROM();
+          }
+          if(on3_hora_temp2 < off3_hora_temp2)
+          {
+            dispScreen=0;
+            clearScreen();
+            mainScreen(true);
+            on3_minuto = on3_minuto_temp2;
+            on3_hora = on3_hora_temp2;
+            off3_minuto = off3_minuto_temp2;
+            off3_hora = off3_hora_temp2;
+            temporizador_3_ativado = temporizador_3_ativado_temp2;
+            salvar_timers_EEPROM();
+          }
+        }
+
+        if ((x >= 21) && (x <= 65) && (y >= 45) && (y <= 88))           // Hora ligar mais 
+        {
+          waitForIt(21, 45, 65, 88);
+          on3_hora_temp2 += 1;
+          if(on3_hora_temp2 > 23)
+          {
+            on3_hora_temp2 = 0;
+          }
+          config_timer();
+        } 
+        if ((x >= 21) && (x <= 65) && (y >= 135) && (y <= 178))           // Hora ligar menos
+        {
+          waitForIt(21, 45, 65, 88);
+          on3_hora_temp2 -= 1;
+          if(on3_hora_temp2 < 0)
+          {
+            on3_hora_temp2 = 23;
+          }
+          config_timer();
+        } 
+
+        if ((x >= 89) && (x <= 133) && (y >= 45) && (y <= 88))           // Minuto ligar mais 
+        {
+          waitForIt(89, 45, 133, 88);
+          on3_minuto_temp2 += 1;
+          if(on3_minuto_temp2 > 59)
+          {
+            on3_minuto_temp2 = 0;
+          }
+          config_timer();
+        } 
+        if ((x >= 89) && (x <= 133) && (y >= 135) && (y <= 178))           // Minuto ligar menos
+        {
+          waitForIt(89, 135, 133, 178);
+          on3_minuto_temp2 -= 1;
+          if(on3_minuto_temp2 < 0)
+          {
+            on3_minuto_temp2 = 59;
+          }
+          config_timer();
+        }
+        if ((x >= 187) && (x <= 231) && (y >= 45) && (y <= 88))           // Hora desligar mais 
+        {
+          waitForIt(187, 45, 231, 88);
+          off3_hora_temp2 += 1;
+          if(off3_hora_temp2 > 23)
+          {
+            off3_hora_temp2 = 0;
+          }
+          config_timer();
+        } 
+        if ((x >= 187) && (x <= 231) && (y >= 135) && (y <= 178))           // Hora desligar menos
+        {
+          waitForIt(187, 135, 231, 178);
+          off3_hora_temp2 -= 1;
+          if(off3_hora_temp2 < 0)
+          {
+            off3_hora_temp2 = 23;
+          }
+          config_timer();
+        } 
+
+        if ((x >= 255) && (x <= 299) && (y >= 45) && (y <= 88))           // Minuto desligar mais 
+        {
+          waitForIt(255, 45, 299, 88);
+          off3_minuto_temp2 += 1;
+          if(off3_minuto_temp2 > 59)
+          {
+            off3_minuto_temp2 = 0;
+          }
+          config_timer();
+        } 
+        if ((x >= 255) && (x <= 299) && (y >= 135) && (y <= 178))           // Minuto desligar menos
+        {
+          waitForIt(255, 135, 299, 178);
+          off3_minuto_temp2 -= 1;
+          if(off3_minuto_temp2 < 0)
+          {
+            off3_minuto_temp2 = 59;
+          }
+          config_timer();
+        }
+        if ((x>=domI[0]-20) && (x<=domI[2]+20) && (y>=domI[1]) && (y<=domI[3]))           // Ativar / desativar timer
+        {
+          waitForIt(domI[0]-20, domI[1], domI[2]+20, domI[3]);
+          if(temporizador_3_ativado_temp2 == 0)
+          {
+            temporizador_3_ativado_temp2 = 1;
+          }
+          else
+          {
+            temporizador_3_ativado_temp2 = 0;
+          }
+          config_timer(); 
+        }  
+      }
+      if(temporizador_4 == true)
+      {
+        if ((x>=salV[0]) && x<=salV[2] && (y>=salV[1]) && (y<=salV[3]))
+        {
+          waitForIt(salV[0], salV[1], salV[2], salV[3]); // Função salvar
+
+          if((on4_hora_temp2 == off4_hora_temp2) && (on4_minuto_temp2 >= off4_minuto_temp2))
+          {
+            setFont(SMALL, 255, 0, 0, 0, 0, 0);
+            myGLCD.print("HORA", 20, 205);
+            myGLCD.print("ERRADA!", 20, 222);
+          }
+
+          if(off4_hora_temp2 < on4_hora_temp2)
+          {
+            setFont(SMALL, 255, 0, 0, 0, 0, 0);
+            myGLCD.print("HORA", 20, 205);
+            myGLCD.print("ERRADA!", 20, 222);
+          }
+
+          if((on4_hora_temp2 == off4_hora_temp2) && (off4_minuto_temp2 > on4_minuto_temp2))
+          {
+            dispScreen=0;
+            clearScreen();
+            mainScreen(true);
+            on4_minuto = on4_minuto_temp2;
+            on4_hora = on4_hora_temp2;
+            off4_minuto = off4_minuto_temp2;
+            off4_hora = off4_hora_temp2;
+            temporizador_4_ativado = temporizador_4_ativado_temp2;
+            salvar_timers_EEPROM();
+          }
+          if(on4_hora_temp2 < off4_hora_temp2)
+          {
+            dispScreen=0;
+            clearScreen();
+            mainScreen(true);
+            on4_minuto = on4_minuto_temp2;
+            on4_hora = on4_hora_temp2;
+            off4_minuto = off4_minuto_temp2;
+            off4_hora = off4_hora_temp2;
+            temporizador_4_ativado = temporizador_4_ativado_temp2;
+            salvar_timers_EEPROM();
+          }
+        }
+        if ((x >= 21) && (x <= 65) && (y >= 45) && (y <= 88))           // Hora ligar mais 
+        {
+          waitForIt(21, 45, 65, 88);
+          on4_hora_temp2 += 1;
+          if(on4_hora_temp2 > 23)
+          {
+            on4_hora_temp2 = 0;
+          }
+          config_timer();
+        } 
+        if ((x >= 21) && (x <= 65) && (y >= 135) && (y <= 178))           // Hora ligar menos
+        {
+          waitForIt(21, 45, 65, 88);
+          on4_hora_temp2 -= 1;
+          if(on4_hora_temp2 < 0)
+          {
+            on4_hora_temp2 = 23;
+          }
+          config_timer();
+        } 
+
+        if ((x >= 89) && (x <= 133) && (y >= 45) && (y <= 88))           // Minuto ligar mais 
+        {
+          waitForIt(89, 45, 133, 88);
+          on4_minuto_temp2 += 1;
+          if(on4_minuto_temp2 > 59)
+          {
+            on4_minuto_temp2 = 0;
+          }
+          config_timer();
+        } 
+        if ((x >= 89) && (x <= 133) && (y >= 135) && (y <= 178))           // Minuto ligar menos
+        {
+          waitForIt(89, 135, 133, 178);
+          on4_minuto_temp2 -= 1;
+          if(on4_minuto_temp2 < 0)
+          {
+            on4_minuto_temp2 = 59;
+          }
+          config_timer();
+        }
+        if ((x >= 187) && (x <= 231) && (y >= 45) && (y <= 88))           // Hora desligar mais 
+        {
+          waitForIt(187, 45, 231, 88);
+          off4_hora_temp2 += 1;
+          if(off4_hora_temp2 > 23)
+          {
+            off4_hora_temp2 = 0;
+          }
+          config_timer();
+        } 
+        if ((x >= 187) && (x <= 231) && (y >= 135) && (y <= 178))           // Hora desligar menos
+        {
+          waitForIt(187, 135, 231, 178);
+          off4_hora_temp2 -= 1;
+          if(off4_hora_temp2 < 0)
+          {
+            off4_hora_temp2 = 23;
+          }
+          config_timer();
+        } 
+
+        if ((x >= 255) && (x <= 299) && (y >= 45) && (y <= 88))           // Minuto desligar mais 
+        {
+          waitForIt(255, 45, 299, 88);
+          off4_minuto_temp2 += 1;
+          if(off4_minuto_temp2 > 59)
+          {
+            off4_minuto_temp2 = 0;
+          }
+          config_timer();
+        } 
+        if ((x >= 255) && (x <= 299) && (y >= 135) && (y <= 178))           // Minuto desligar menos
+        {
+          waitForIt(255, 135, 299, 178);
+          off4_minuto_temp2 -= 1;
+          if(off4_minuto_temp2 < 0)
+          {
+            off4_minuto_temp2 = 59;
+          }
+          config_timer();
+        }
+        if ((x>=domI[0]-20) && (x<=domI[2]+20) && (y>=domI[1]) && (y<=domI[3]))           // Ativar / desativar timer
+        {
+          waitForIt(domI[0]-20, domI[1], domI[2]+20, domI[3]);
+          if(temporizador_4_ativado_temp2 == 0)
+          {
+            temporizador_4_ativado_temp2 = 1;
+          }
+          else
+          {
+            temporizador_4_ativado_temp2 = 0;
+          }
+          config_timer(); 
+        }  
+      }
+      if(temporizador_5 == true)
+      {
+        if ((x>=salV[0]) && x<=salV[2] && (y>=salV[1]) && (y<=salV[3]))
+        {        
+          waitForIt(salV[0], salV[1], salV[2], salV[3]); // Função salvar
+
+          if((on5_hora_temp2 == off5_hora_temp2) && (on5_minuto_temp2 >= off5_minuto_temp2))
+          {
+            setFont(SMALL, 255, 0, 0, 0, 0, 0);
+            myGLCD.print("HORA", 20, 205);
+            myGLCD.print("ERRADA!", 20, 222);
+          }
+
+          if(off5_hora_temp2 < on5_hora_temp2)
+          {
+            setFont(SMALL, 255, 0, 0, 0, 0, 0);
+            myGLCD.print("HORA", 20, 205);
+            myGLCD.print("ERRADA!", 20, 222);
+          }
+
+          if((on5_hora_temp2 == off5_hora_temp2) && (off5_minuto_temp2 > on5_minuto_temp2))
+          {
+            dispScreen=0;
+            clearScreen();
+            mainScreen(true);
+            on5_minuto = on5_minuto_temp2;
+            on5_hora = on5_hora_temp2;
+            off5_minuto = off5_minuto_temp2;
+            off5_hora = off5_hora_temp2;
+            temporizador_5_ativado = temporizador_5_ativado_temp2;
+            salvar_timers_EEPROM();
+          }
+          if(on5_hora_temp2 < off5_hora_temp2)
+          {
+            dispScreen=0;
+            clearScreen();
+            mainScreen(true);
+            on5_minuto = on5_minuto_temp2;
+            on5_hora = on5_hora_temp2;
+            off5_minuto = off5_minuto_temp2;
+            off5_hora = off5_hora_temp2;
+            temporizador_5_ativado = temporizador_5_ativado_temp2;
+            salvar_timers_EEPROM();
+          }
+        }
+        if ((x >= 21) && (x <= 65) && (y >= 45) && (y <= 88))           // Hora ligar mais 
+        {
+          waitForIt(21, 45, 65, 88);
+          on5_hora_temp2 += 1;
+          if(on5_hora_temp2 > 23)
+          {
+            on5_hora_temp2 = 0;
+          }
+          config_timer();
+        } 
+        if ((x >= 21) && (x <= 65) && (y >= 135) && (y <= 178))           // Hora ligar menos
+        {
+          waitForIt(21, 45, 65, 88);
+          on5_hora_temp2 -= 1;
+          if(on5_hora_temp2 < 0)
+          {
+            on5_hora_temp2 = 23;
+          }
+          config_timer();
+        } 
+
+        if ((x >= 89) && (x <= 133) && (y >= 45) && (y <= 88))           // Minuto ligar mais 
+        {
+          waitForIt(89, 45, 133, 88);
+          on5_minuto_temp2 += 1;
+          if(on5_minuto_temp2 > 59)
+          {
+            on5_minuto_temp2 = 0;
+          }
+          config_timer();
+        } 
+        if ((x >= 89) && (x <= 133) && (y >= 135) && (y <= 178))           // Minuto ligar menos
+        {
+          waitForIt(89, 135, 133, 178);
+          on5_minuto_temp2 -= 1;
+          if(on5_minuto_temp2 < 0)
+          {
+            on5_minuto_temp2 = 59;
+          }
+          config_timer();
+        }
+        if ((x >= 187) && (x <= 231) && (y >= 45) && (y <= 88))           // Hora desligar mais 
+        {
+          waitForIt(187, 45, 231, 88);
+          off5_hora_temp2 += 1;
+          if(off5_hora_temp2 > 23)
+          {
+            off5_hora_temp2 = 0;
+          }
+          config_timer();
+        } 
+        if ((x >= 187) && (x <= 231) && (y >= 135) && (y <= 178))           // Hora desligar menos
+        {
+          waitForIt(187, 135, 231, 178);
+          off5_hora_temp2 -= 1;
+          if(off5_hora_temp2 < 0)
+          {
+            off5_hora_temp2 = 23;
+          }
+          config_timer();
+        } 
+
+        if ((x >= 255) && (x <= 299) && (y >= 45) && (y <= 88))           // Minuto desligar mais 
+        {
+          waitForIt(255, 45, 299, 88);
+          off5_minuto_temp2 += 1;
+          if(off5_minuto_temp2 > 59)
+          {
+            off5_minuto_temp2 = 0;
+          }
+          config_timer();
+        } 
+        if ((x >= 255) && (x <= 299) && (y >= 135) && (y <= 178))           // Minuto desligar menos
+        {
+          waitForIt(255, 135, 299, 178);
+          off5_minuto_temp2 -= 1;
+          if(off5_minuto_temp2 < 0)
+          {
+            off5_minuto_temp2 = 59;
+          }
+          config_timer();
+        }
+        if ((x>=domI[0]-20) && (x<=domI[2]+20) && (y>=domI[1]) && (y<=domI[3]))           // Ativar / desativar timer
+        {
+          waitForIt(domI[0]-20, domI[1], domI[2]+20, domI[3]);
+          if(temporizador_5_ativado_temp2 == 0)
+          {
+            temporizador_5_ativado_temp2 = 1;
+          }
+          else
+          {
+            temporizador_5_ativado_temp2 = 0;
+          }
+          config_timer(); 
+        }  
+      }
+      break;
     }
   }
 }
-
-
 
 

@@ -134,6 +134,36 @@ struct config_luz                        // Luz noturna
 } 
 luznoturna;
 
+struct config_timers
+{
+  int on1_minuto_temp;
+  int on1_hora_temp;
+  int on2_minuto_temp;
+  int on2_hora_temp;
+  int on3_minuto_temp;
+  int on3_hora_temp;
+  int on4_minuto_temp;
+  int on4_hora_temp;
+  int on5_minuto_temp;
+  int on5_hora_temp;
+  int off1_minuto_temp;
+  int off1_hora_temp;
+  int off2_minuto_temp;
+  int off2_hora_temp;
+  int off3_minuto_temp;
+  int off3_hora_temp;
+  int off4_minuto_temp;
+  int off4_hora_temp;
+  int off5_minuto_temp;
+  int off5_hora_temp;
+  int temporizador_1_ativado_temp;
+  int temporizador_2_ativado_temp;
+  int temporizador_3_ativado_temp;
+  int temporizador_4_ativado_temp;
+  int temporizador_5_ativado_temp;
+}
+timers;
+
 void SaveLEDToEEPROM()                  
 {
   EEPROM.write(0, 123);         //to determine if data available in EEPROM
@@ -275,6 +305,35 @@ void Salvar_luz_noturna_EEPROM()
   luznoturna.MinI_t = int(MinI);
   luznoturna.MaxI_t = int(MaxI);
   EEPROM_writeAnything(376, luznoturna);
+}
+void salvar_timers_EEPROM()
+{
+  timers.on1_minuto_temp = int(on1_minuto); 
+  timers.on1_hora_temp = int(on1_hora);
+  timers.on2_minuto_temp = int(on2_minuto); 
+  timers.on2_hora_temp = int(on2_hora);
+  timers.on3_minuto_temp = int(on3_minuto); 
+  timers.on3_hora_temp = int(on3_hora);
+  timers.on4_minuto_temp = int(on4_minuto); 
+  timers.on4_hora_temp = int(on4_hora);
+  timers.on5_minuto_temp = int(on5_minuto); 
+  timers.on5_hora_temp = int(on5_hora);
+  timers.off1_minuto_temp = int(off1_minuto); 
+  timers.off1_hora_temp = int(off1_hora);
+  timers.off2_minuto_temp = int(off2_minuto); 
+  timers.off2_hora_temp = int(off2_hora);
+  timers.off3_minuto_temp = int(off3_minuto); 
+  timers.off3_hora_temp = int(off3_hora);
+  timers.off4_minuto_temp = int(off4_minuto); 
+  timers.off4_hora_temp = int(off4_hora);
+  timers.off5_minuto_temp = int(off5_minuto); 
+  timers.off5_hora_temp = int(off5_hora);  
+  timers.temporizador_1_ativado_temp = int(temporizador_1_ativado);
+  timers.temporizador_2_ativado_temp = int(temporizador_2_ativado);
+  timers.temporizador_3_ativado_temp = int(temporizador_3_ativado);
+  timers.temporizador_4_ativado_temp = int(temporizador_4_ativado);
+  timers.temporizador_5_ativado_temp = int(temporizador_5_ativado);
+  EEPROM_writeAnything(380, timers);
 }
 
 void ReadFromEEPROM()
@@ -435,3 +494,35 @@ void ler_luz_noturna_EEPROM()
   MinI = luznoturna.MinI_t;
   MaxI = luznoturna.MaxI_t;
 }
+void ler_timers_EEPROM()
+{
+  EEPROM_readAnything(380, timers);
+  on1_minuto = timers.on1_minuto_temp; 
+  on1_hora = timers.on1_hora_temp;
+  on2_minuto = timers.on2_minuto_temp; 
+  on2_hora = timers.on2_hora_temp;
+  on3_minuto = timers.on3_minuto_temp; 
+  on3_hora = timers.on3_hora_temp;
+  on4_minuto = timers.on4_minuto_temp; 
+  on4_hora = timers.on4_hora_temp;
+  on5_minuto = timers.on5_minuto_temp; 
+  on5_hora = timers.on5_hora_temp;
+  off1_minuto = timers.off1_minuto_temp; 
+  off1_hora = timers.off1_hora_temp;
+  off2_minuto = timers.off2_minuto_temp; 
+  off2_hora = timers.off2_hora_temp;
+  off3_minuto = timers.off3_minuto_temp; 
+  off3_hora = timers.off3_hora_temp;
+  off4_minuto = timers.off4_minuto_temp; 
+  off4_hora = timers.off4_hora_temp;
+  off5_minuto = timers.off5_minuto_temp; 
+  off5_hora = timers.off5_hora_temp;
+  temporizador_1_ativado = timers.temporizador_1_ativado_temp;
+  temporizador_2_ativado = timers.temporizador_2_ativado_temp;
+  temporizador_3_ativado = timers.temporizador_3_ativado_temp;
+  temporizador_4_ativado = timers.temporizador_4_ativado_temp;
+  temporizador_5_ativado = timers.temporizador_5_ativado_temp;
+}
+
+
+

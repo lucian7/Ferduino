@@ -23,6 +23,11 @@ void setup()
   pinMode (dosadora1, OUTPUT);
   pinMode (dosadora2, OUTPUT);
   pinMode (dosadora3, OUTPUT);
+  pinMode (temporizador1, OUTPUT);
+  pinMode (temporizador2, OUTPUT);
+  pinMode (temporizador3, OUTPUT);
+  pinMode (temporizador4, OUTPUT);
+  pinMode (temporizador5, OUTPUT);
 
   myGLCD.InitLCD(LANDSCAPE); // Orientação da imagem no LCD.
   myGLCD.clrScr(); // Limpa o LCD.
@@ -54,6 +59,7 @@ void setup()
   lerDENEEPROM();
   ler_dosadora_EEPROM();
   ler_luz_noturna_EEPROM();
+  ler_timers_EEPROM();
   
   card.init(SPI_QUARTER_SPEED,chipselect); // Inicia a comunicação com o cartão SD.
   volume.init(&card);

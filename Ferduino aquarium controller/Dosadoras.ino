@@ -14,7 +14,7 @@ void check_dosagem_automatica_1()
   char oldminuto6;
   oldminuto6 = time6;
   time6 = t.min;
-  int minutos_agora = (t.hour * 60) + t.min;
+  
 
   digitalWrite (4, LOW);
 
@@ -27,7 +27,7 @@ void check_dosagem_automatica_1()
         while ((n = file.read(buf, sizeof(buf))) > 0)
         {
           minuto01 = atoi(buf);
-          if(minuto01 == minutos_agora)
+          if(minuto01 ==  NumMins(t.hour,t.min))
           {
             Serial.println("Dosando 1:");
             Serial.println(rtc.getTimeStr(FORMAT_LONG));
@@ -54,7 +54,7 @@ void check_dosagem_automatica_2()
   char oldminuto7;
   oldminuto7 = time7;
   time7 = t.min;
-  int minutos_agora = (t.hour * 60) + t.min;
+  
 
   digitalWrite (4, LOW);
 
@@ -67,7 +67,7 @@ void check_dosagem_automatica_2()
         while ((n = file.read(buf, sizeof(buf))) > 0)
         {
           minuto01 = atoi(buf);        
-          if(minuto01 == minutos_agora)
+          if(minuto01 ==  NumMins(t.hour,t.min))
           {
             Serial.println("Dosando 2:");
             Serial.println(rtc.getTimeStr(FORMAT_LONG));
@@ -94,7 +94,7 @@ void check_dosagem_automatica_3()
   char oldminuto8;
   oldminuto8 = time8;
   time8 = t.min;
-  int minutos_agora = (t.hour * 60) + t.min;
+  
 
   digitalWrite (4, LOW);
 
@@ -107,7 +107,7 @@ void check_dosagem_automatica_3()
         while ((n = file.read(buf, sizeof(buf))) > 0)
         {
           minuto01 = atoi(buf);     
-          if(minuto01 == minutos_agora)
+          if(minuto01 ==  NumMins(t.hour,t.min))
           {
             Serial.println("Dosando 3:");
             Serial.println(rtc.getTimeStr(FORMAT_LONG));
@@ -134,7 +134,7 @@ void check_dosagem_personalizada_1()
   char oldminuto9;
   oldminuto9 = time9;
   time9 = t.min;
-  int minutos_agora = (t.hour * 60) + t.min;
+  
 
   digitalWrite (4, LOW);
 
@@ -150,7 +150,7 @@ void check_dosagem_personalizada_1()
           while ((n = file.read(buf, sizeof(buf))) > 0)
           {
             minuto01 = atoi(buf);
-            if(minuto01 == minutos_agora)
+            if(minuto01 ==  NumMins(t.hour,t.min))
             {
               Serial.println("Dosando 1:");
               Serial.println(rtc.getTimeStr(FORMAT_LONG));
@@ -172,7 +172,7 @@ void check_dosagem_personalizada_1()
           while ((n = file.read(buf, sizeof(buf))) > 0)
           {
             minuto01 = atoi(buf);
-            if(minuto01 == minutos_agora)
+            if(minuto01 ==  NumMins(t.hour,t.min))
             {
               Serial.println("Dosando 1:");
               Serial.println(rtc.getTimeStr(FORMAT_LONG));
@@ -194,7 +194,7 @@ void check_dosagem_personalizada_1()
           while ((n = file.read(buf, sizeof(buf))) > 0)
           {
             minuto01 = atoi(buf);
-            if(minuto01 == minutos_agora)
+            if(minuto01 ==  NumMins(t.hour,t.min))
             {
               Serial.println("Dosando 1:");
               Serial.println(rtc.getTimeStr(FORMAT_LONG));
@@ -216,7 +216,7 @@ void check_dosagem_personalizada_1()
           while ((n = file.read(buf, sizeof(buf))) > 0)
           {
             minuto01 = atoi(buf);
-            if(minuto01 == minutos_agora)
+            if(minuto01 ==  NumMins(t.hour,t.min))
             {
               Serial.println("Dosando 1:");
               Serial.println(rtc.getTimeStr(FORMAT_LONG));
@@ -238,7 +238,7 @@ void check_dosagem_personalizada_1()
           while ((n = file.read(buf, sizeof(buf))) > 0)
           {
             minuto01 = atoi(buf);
-            if(minuto01 == minutos_agora)
+            if(minuto01 ==  NumMins(t.hour,t.min))
             {
               Serial.println("Dosando 1:");
               Serial.println(rtc.getTimeStr(FORMAT_LONG));
@@ -260,7 +260,7 @@ void check_dosagem_personalizada_1()
           while ((n = file.read(buf, sizeof(buf))) > 0)
           {
             minuto01 = atoi(buf);
-            if(minuto01 == minutos_agora)
+            if(minuto01 ==  NumMins(t.hour,t.min))
             {
               Serial.println("Dosando 1:");
               Serial.println(rtc.getTimeStr(FORMAT_LONG));
@@ -283,7 +283,7 @@ void check_dosagem_personalizada_1()
           while ((n = file.read(buf, sizeof(buf))) > 0)
           {
             minuto01 = atoi(buf);
-            if(minuto01 == minutos_agora)
+            if(minuto01 ==  NumMins(t.hour,t.min))
             {
               Serial.println("Dosando 1:");
               Serial.println(rtc.getTimeStr(FORMAT_LONG));
@@ -311,7 +311,7 @@ void check_dosagem_personalizada_2()
   char oldminuto10;
   oldminuto10 = time10;
   time10 = t.min;
-  int minutos_agora = (t.hour * 60) + t.min;
+  
 
   digitalWrite (4, LOW);
 
@@ -326,7 +326,7 @@ void check_dosagem_personalizada_2()
           while ((n = file.read(buf, sizeof(buf))) > 0)
           {
             minuto01 = atoi(buf);
-            if(minuto01 == minutos_agora)
+            if(minuto01 ==  NumMins(t.hour,t.min))
             {
               Serial.println("Dosando 2:");
               Serial.println(rtc.getTimeStr(FORMAT_LONG));
@@ -348,7 +348,7 @@ void check_dosagem_personalizada_2()
           while ((n = file.read(buf, sizeof(buf))) > 0)
           {
             minuto01 = atoi(buf);
-            if(minuto01 == minutos_agora)
+            if(minuto01 ==  NumMins(t.hour,t.min))
             {
               Serial.println("Dosando 2:");
               Serial.println(rtc.getTimeStr(FORMAT_LONG));
@@ -370,7 +370,7 @@ void check_dosagem_personalizada_2()
           while ((n = file.read(buf, sizeof(buf))) > 0)
           {
             minuto01 = atoi(buf);
-            if(minuto01 == minutos_agora)
+            if(minuto01 ==  NumMins(t.hour,t.min))
             {
               Serial.println("Dosando 2:");
               Serial.println(rtc.getTimeStr(FORMAT_LONG));
@@ -392,7 +392,7 @@ void check_dosagem_personalizada_2()
           while ((n = file.read(buf, sizeof(buf))) > 0)
           {
             minuto01 = atoi(buf);
-            if(minuto01 == minutos_agora)
+            if(minuto01 ==  NumMins(t.hour,t.min))
             {
               Serial.println("Dosando 2:");
               Serial.println(rtc.getTimeStr(FORMAT_LONG));
@@ -414,7 +414,7 @@ void check_dosagem_personalizada_2()
           while ((n = file.read(buf, sizeof(buf))) > 0)
           {
             minuto01 = atoi(buf);
-            if(minuto01 == minutos_agora)
+            if(minuto01 ==  NumMins(t.hour,t.min))
             {
               Serial.println("Dosando 2:");
               Serial.println(rtc.getTimeStr(FORMAT_LONG));
@@ -436,7 +436,7 @@ void check_dosagem_personalizada_2()
           while ((n = file.read(buf, sizeof(buf))) > 0)
           {
             minuto01 = atoi(buf);
-            if(minuto01 == minutos_agora)
+            if(minuto01 ==  NumMins(t.hour,t.min))
             {
               Serial.println("Dosando 2:");
               Serial.println(rtc.getTimeStr(FORMAT_LONG));
@@ -459,7 +459,7 @@ void check_dosagem_personalizada_2()
           while ((n = file.read(buf, sizeof(buf))) > 0)
           {
             minuto01 = atoi(buf);
-            if(minuto01 == minutos_agora)
+            if(minuto01 ==  NumMins(t.hour,t.min))
             {
               Serial.println("Dosando 2:");
               Serial.println(rtc.getTimeStr(FORMAT_LONG));
@@ -487,7 +487,7 @@ void check_dosagem_personalizada_3()
   char oldminuto11;
   oldminuto11 = time11;
   time11 = t.min;
-  int minutos_agora = (t.hour * 60) + t.min;
+  
 
   digitalWrite (4, LOW);
 
@@ -502,7 +502,7 @@ void check_dosagem_personalizada_3()
           while ((n = file.read(buf, sizeof(buf))) > 0)
           {
             minuto01 = atoi(buf);
-            if(minuto01 == minutos_agora)
+            if(minuto01 ==  NumMins(t.hour,t.min))
             {
               Serial.println("Dosando 3:");
               Serial.println(rtc.getTimeStr(FORMAT_LONG));
@@ -524,7 +524,7 @@ void check_dosagem_personalizada_3()
           while ((n = file.read(buf, sizeof(buf))) > 0)
           {
             minuto01 = atoi(buf);
-            if(minuto01 == minutos_agora)
+            if(minuto01 ==  NumMins(t.hour,t.min))
             {
               Serial.println("Dosando 3:");
               Serial.println(rtc.getTimeStr(FORMAT_LONG));
@@ -546,7 +546,7 @@ void check_dosagem_personalizada_3()
           while ((n = file.read(buf, sizeof(buf))) > 0)
           {
             minuto01 = atoi(buf);
-            if(minuto01 == minutos_agora)
+            if(minuto01 ==  NumMins(t.hour,t.min))
             {
               Serial.println("Dosando 3:");
               Serial.println(rtc.getTimeStr(FORMAT_LONG));
@@ -568,7 +568,7 @@ void check_dosagem_personalizada_3()
           while ((n = file.read(buf, sizeof(buf))) > 0)
           {
             minuto01 = atoi(buf);
-            if(minuto01 == minutos_agora)
+            if(minuto01 ==  NumMins(t.hour,t.min))
             {
               Serial.println("Dosando 3:");
               Serial.println(rtc.getTimeStr(FORMAT_LONG));
@@ -590,7 +590,7 @@ void check_dosagem_personalizada_3()
           while ((n = file.read(buf, sizeof(buf))) > 0)
           {
             minuto01 = atoi(buf);
-            if(minuto01 == minutos_agora)
+            if(minuto01 ==  NumMins(t.hour,t.min))
             {
               Serial.println("Dosando 3:");
               Serial.println(rtc.getTimeStr(FORMAT_LONG));
@@ -612,7 +612,7 @@ void check_dosagem_personalizada_3()
           while ((n = file.read(buf, sizeof(buf))) > 0)
           {
             minuto01 = atoi(buf);
-            if(minuto01 == minutos_agora)
+            if(minuto01 ==  NumMins(t.hour,t.min))
             {
               Serial.println("Dosando 3:");
               Serial.println(rtc.getTimeStr(FORMAT_LONG));
@@ -634,7 +634,7 @@ void check_dosagem_personalizada_3()
           while ((n = file.read(buf, sizeof(buf))) > 0)
           {
             minuto01 = atoi(buf);
-            if(minuto01 == minutos_agora)
+            if(minuto01 ==  NumMins(t.hour,t.min))
             {
               Serial.println("Dosando 3:");
               Serial.println(rtc.getTimeStr(FORMAT_LONG));

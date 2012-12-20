@@ -48,11 +48,11 @@ void setClock()
   setFont(SMALL, 255, 255, 255, 0, 0, 0);
   myGLCD.print("HORA:", 10, 51);
   myGLCD.print("DATA:", 10, 134); 
-  
+
   setFont(LARGE, 255, 255, 255, 0, 0, 0);
   myGLCD.print(":", 120, 48);
   myGLCD.print(":", 210, 48);
-  
+
   if (t_temp.hour<10)
   {
     myGLCD.printNumI(0, 70, 48);
@@ -99,7 +99,7 @@ void setClock()
     myGLCD.printNumI(t_temp.mon, 160, 132);
   }
   myGLCD.printNumI(t_temp.year, 230, 132);
-  
+
 }
 
 void testScreen(boolean refreshAll=false)//-------------------------------- Teste do leds ------------------------------------- tela =3
@@ -126,8 +126,8 @@ void testScreen(boolean refreshAll=false)//-------------------------------- Test
     myGLCD.print("TESTE", stsT[0]+25, stsT[1]+40);   
     min_cnt=0;
 
-/*    myGLCD.setColor(0, 0, 0);
-    myGLCD.fillRect (1, 15, 318, 37);    //clear above buttons*/
+    /*    myGLCD.setColor(0, 0, 0);
+     myGLCD.fillRect (1, 15, 318, 37);    //clear above buttons*/
     myGLCD.setColor(0, 0, 200);
     myGLCD.fillRect(stsT[0]+5, stsT[1]+5, stsT[2]-5, stsT[3]-40);   //clear 'start'
     setFont(LARGE, 255, 255, 255, 0, 0, 200);
@@ -348,9 +348,9 @@ void tpaScreen(boolean refreshAll = false) //-----------------------------------
   else {
     printButton("SABADO", sabA[0], sabA[1], sabA[2], sabA[3]); //botao sabado
   }
-  if (temp2domingo == 7) printButton_verde("DOMINGO", domI[0], domI[1], domI[2], domI[3]); //botao sabado
+  if (temp2domingo == 7) printButton_verde("DOMINGO", domI[0], domI[1], domI[2], domI[3]); //botao domingo
   else {
-    printButton("DOMINGO", domI[0], domI[1], domI[2], domI[3]); //botao sabado
+    printButton("DOMINGO", domI[0], domI[1], domI[2], domI[3]); //botao domingo
   }
   if (falha_tpa == true) {
     printButton_vermelho("FALHA!!", proX[0], proX[1], proX[2], proX[3]); //Sinaliza que houve uma falha durante a TPA.
@@ -525,10 +525,10 @@ void config_phA_Screen(boolean refreshAll=false)
     myGLCD.print("PH DESEJADO:", 110, 20);
     myGLCD.print("VARIACAO PERMITIDA:", 90, 70);
     myGLCD.print("VARIACAO PARA ACIONAR O ALARME:", 50, 120);
-   /* myGLCD.print("NAO HA FUNCAO DE CONTROLE", 25, 170);
-    myGLCD.print("ATRIBUIDADA PARA ESTE PARAMETRO", 25, 185);
-    myGLCD.print("ESSES VALORES SAO APENAS ", 25, 200);
-    myGLCD.print("REFERENCIA PARA O GRAFICO.", 25, 215);**/
+    /* myGLCD.print("NAO HA FUNCAO DE CONTROLE", 25, 170);
+     myGLCD.print("ATRIBUIDADA PARA ESTE PARAMETRO", 25, 185);
+     myGLCD.print("ESSES VALORES SAO APENAS ", 25, 200);
+     myGLCD.print("REFERENCIA PARA O GRAFICO.", 25, 215);**/
 
     printButton("-", temM[0], temM[1], temM[2], temM[3], true);      //temp minus
     printButton("+", temP[0], temP[1], temP[2], temP[3], true);      //temp plus
@@ -563,10 +563,10 @@ void config_dens_Screen(boolean refreshAll=false)
     myGLCD.print("DENSIDADE DESEJADA:", 90, 20);
     myGLCD.print("VARIACAO PERMITIDA:", 90, 70);
     myGLCD.print("VARIACAO PARA ACIONAR O ALARME:", 50, 120);
-  /*  myGLCD.print("NAO HA FUNCAO DE CONTROLE", 25, 170);
-    myGLCD.print("ATRIBUIDA PARA ESTE PARAMETRO", 25, 185);
-    myGLCD.print("ESSES VALORES SAO APENAS", 25, 200);
-    myGLCD.print("REFERENCIA PARA O GRAFICO.", 25, 215);*/
+    /*  myGLCD.print("NAO HA FUNCAO DE CONTROLE", 25, 170);
+     myGLCD.print("ATRIBUIDA PARA ESTE PARAMETRO", 25, 185);
+     myGLCD.print("ESSES VALORES SAO APENAS", 25, 200);
+     myGLCD.print("REFERENCIA PARA O GRAFICO.", 25, 215);*/
 
     printButton("-", temM[0], temM[1], temM[2], temM[3], true);      //temp minus
     printButton("+", temP[0], temP[1], temP[2], temP[3], true);      //temp plus
@@ -1995,7 +1995,7 @@ void desativar_dosadoras(boolean refreshAll = false)
     printButton("VOLTAR", volT[0], volT[1], volT[2], volT[3]);
 
     setFont(SMALL, 255, 255, 255, 0, 0, 0); 
-    myGLCD.print("DOSADORA 1:", 120, 30);
+    myGLCD.print("DOSADORA 1:", 117, 30);
     myGLCD.print("DOSADORA 2:", 120, 100);
     myGLCD.print("DOSADORA 3:", 120, 170); 
     setFont(SMALL, 255, 0, 0, 0, 0, 0); 
@@ -2010,7 +2010,7 @@ void desativar_dosadoras(boolean refreshAll = false)
   {
     printButton_verde("ATIVADO", 100, 45, 220, 85);
     myGLCD.setColor(0, 0, 0);
-    myGLCD.fillRect (3, 26, 124, 43);
+    myGLCD.fillRect (3, 26, 117, 43);
     myGLCD.fillRect (3, 45, 95, 61);
     myGLCD.fillRect (3, 60, 95, 76);
     myGLCD.fillRect (3, 75, 95, 91);
@@ -2032,7 +2032,7 @@ void desativar_dosadoras(boolean refreshAll = false)
   {
     printButton_verde("ATIVADO", 100, 115, 220, 155);
     myGLCD.setColor(0, 0, 0); 
-    myGLCD.fillRect (3, 96, 124, 113);
+    myGLCD.fillRect (3, 96, 117, 113);
     myGLCD.fillRect (3, 115, 95, 131);
     myGLCD.fillRect (3, 130, 95, 146);
     myGLCD.fillRect (3, 145, 95, 161); 
@@ -2054,7 +2054,7 @@ void desativar_dosadoras(boolean refreshAll = false)
   {
     printButton_verde("ATIVADO", 100, 185, 220, 225); 
     myGLCD.setColor(0, 0, 0);
-    myGLCD.fillRect (3, 166, 124, 183);
+    myGLCD.fillRect (3, 166, 120, 183);
     myGLCD.fillRect (3, 185, 95, 201);
     myGLCD.fillRect (3, 200, 95, 216);
     myGLCD.fillRect (3, 215, 95, 231);
@@ -2090,7 +2090,7 @@ void luz_noturna(boolean refreshAll=false)
     myGLCD.print("ILUMINACAO MINIMA:", 90, 170);
     myGLCD.print("LUA CHEIA:", 120, 20);
     myGLCD.print("LUA NOVA:", 125, 120);
-    
+
     printButton("-", temM[0], temM[1], temM[2], temM[3], true);      //Lua cheia menos
     printButton("+", temP[0], temP[1], temP[2], temP[3], true);      //Lua cheia mais
     printButton("-", almM[0], almM[1], almM[2], almM[3], true);      //Lua nova menos
@@ -2111,9 +2111,642 @@ void menuScreen_2()
 {
 
   printHeader("MENU 2");
-  printButton("LUZ NOTURNA", tanD[0], tanD[1], tanD[2], tanD[3]);
+  printButton("LUZ NOTURNA", tanD[0], tanD[1], tanD[2], tanD[3]); // 1º botaão, 1ª coluna
+  printButton("TIMERS", tesT[0], tesT[1], tesT[2], tesT[3]); // 2º botão, 1ª coluna
+  //  printButton("", temC[0], temC[1], temC[2], temC[3]); // 3º botão, 1ª coluna
+  //  printButton("", graF[0], graF[1], graF[2], graF[3]); // 4º botão, 1ª coluna
+  //  printButton("", ledW[0], ledW[1], ledW[2], ledW[3]); // 1º botão, 2ª coluna
+  //  printButton("", tpaA[0], tpaA[1], tpaA[2], tpaA[3]); // 2º botão, 2ª coluna
+  //  printButton("", dosA[0], dosA[1], dosA[2], dosA[3]); // 3º botão, 2ª coluna
+  //  printButton("", wavM[0], wavM[1], wavM[2], wavM[3]); // 4º botão, 2ª coluna
   printButton("MENU 1", menU[0], menU[1], menU[2], menU[3]);
   printButton("INICIO", iniC[0], iniC[1], iniC[2], iniC[3]);
 }
+
+//--------------------------------------------- Timers -------------------------------- tela =38
+void TimerScreen()
+{ 
+
+  printHeader("SELECIONE O TIMER");
+
+  if (temporizador_1_ativado == 1) 
+  {
+    printButton_verde("T 1",7, 22, 56, 50);     // Timer 1 
+  }
+  else 
+  {
+    printButton("T 1",7, 22, 56, 50);     // Timer 1 
+  }      
+  if (temporizador_2_ativado == 1) 
+  {
+    printButton_verde("T 2",71, 22, 120, 50);     // Timer 2 
+  }
+  else 
+  {
+    printButton("T 2",71, 22, 120, 50);     // Timer 2 
+  }     
+  if (temporizador_3_ativado == 1) 
+  {
+    printButton_verde("T 3",135, 22, 184, 50);     // Timer 3 
+  }
+  else 
+  {
+    printButton("T 3",135, 22, 184, 50);     // Timer 3 
+  }    
+  if (temporizador_4_ativado == 1) 
+  {
+    printButton_verde("T 4",199, 22, 248, 50);     // Timer 4 
+  }
+  else 
+  {
+    printButton("T 4",199, 22, 248, 50);     // Timer 4 
+  }        
+  if (temporizador_5_ativado == 1) 
+  {
+    printButton_verde("T 5",263, 22, 312, 50);     // Timer 5 
+  }
+  else 
+  {
+    printButton("T 5",263, 22, 312, 50);     // Timer 5
+  } 
+
+  printButton_verde("ON",7, 55, 56, 97);      // Botão ON 1 
+  printButton_verde("ON",71, 55, 120, 97);    // Botão ON 2
+  printButton_verde("ON",135, 55, 184, 97);   // Botão ON 3
+  printButton_verde("ON",199, 55, 248, 97);   // Botão ON 4
+  printButton_verde("ON",263, 55, 312, 97);   // Botão ON 5
+
+  myGLCD.setColor(255, 255, 255);  // Retângulos ao redor dos horários
+  myGLCD.drawRoundRect(7, 102, 56, 144);      // Botão ON 1 
+  myGLCD.drawRoundRect(71, 102, 120, 144);    // Botão ON 2 
+  myGLCD.drawRoundRect(135, 102, 184, 144);   // Botão ON 3 
+  myGLCD.drawRoundRect(199, 102, 248, 144);   // Botão ON 4 
+  myGLCD.drawRoundRect(263, 102, 312, 144);   // Botão ON 5  
+
+  printButton_vermelho("OFF",8, 149, 55, 191);      // Botão OFF 1 
+  printButton_vermelho("OFF",72, 149, 119, 191);    // Botão OFF 2 
+  printButton_vermelho("OFF",136, 149, 183, 191);   // Botão OFF 3 
+  printButton_vermelho("OFF",200, 149, 247, 191);   // Botão OFF 4 
+  printButton_vermelho("OFF",264, 149, 311, 191);   // Botão OFF 5 
+
+  myGLCD.setColor(255, 255, 255);  // Retângulos ao redor dos horários
+  myGLCD.drawRoundRect(7, 196, 56, 238);     // Botão OFF 1 
+  myGLCD.drawRoundRect(71, 196, 120, 238);   // Botão OFF 2 
+  myGLCD.drawRoundRect(135, 196, 184, 238);  // Botão OFF 3 
+  myGLCD.drawRoundRect(199, 196, 248, 238);  // Botão OFF 4 
+  myGLCD.drawRoundRect(263, 196, 312, 238);  // Botão OFF 5
+
+  myGLCD.setBackColor(0, 0, 0);
+
+  if (on1_hora < 10) // Timer 1
+  { 
+    myGLCD.print("0",12, 117); 
+    myGLCD.printNumI(on1_hora,21,117);
+  }
+  else
+  {
+    myGLCD.printNumI(on1_hora, 12, 117);
+  }
+  myGLCD.print(":", 29, 117); 
+
+  if (on1_minuto < 10)
+  { 
+    myGLCD.print("0", 37, 117);
+    myGLCD.printNumI(on1_minuto, 46, 117);
+  } 
+  else 
+  { 
+    myGLCD.printNumI(on1_minuto, 37,117);
+  }      
+
+  if (on2_hora < 10) // Timer 2
+  { 
+    myGLCD.print("0", 76, 117);
+    myGLCD.printNumI(on2_hora ,85, 117);
+  }
+  else
+  {
+    myGLCD.printNumI(on2_hora, 76, 117);
+  }
+
+  myGLCD.print(":", 93, 117);    
+
+  if (on2_minuto < 10)
+  { 
+    myGLCD.print("0",101, 117);  
+    myGLCD.printNumI(on2_minuto, 110, 117);
+  } 
+  else 
+  { 
+    myGLCD.printNumI(on2_minuto,101, 117);
+  } 
+
+  if (on3_hora <10) // Timer 3
+  { 
+    myGLCD.print("0",140, 117);   
+    myGLCD.printNumI(on3_hora,149, 117);
+  }
+  else
+  {
+    myGLCD.printNumI(on3_hora, 140, 117);
+  } 
+
+  myGLCD.print(":",157, 117);          
+
+  if (on3_minuto < 10)
+  { 
+    myGLCD.print("0",165, 117);  
+    myGLCD.printNumI(on3_minuto, 174, 117);
+  } 
+  else { 
+    myGLCD.printNumI(on3_minuto ,165, 117);
+  } 
+
+  if (on4_hora < 10) // Timer 4
+  { 
+    myGLCD.print("0",204, 117); 
+    myGLCD.printNumI(on4_hora,213, 117);
+  }
+  else{
+    myGLCD.printNumI(on4_hora,204, 117);
+  }
+
+  myGLCD.print(":",221, 117);         
+
+  if (on4_minuto < 10)
+  { 
+    myGLCD.print("0",229, 117);  
+    myGLCD.printNumI(on4_minuto, 238, 117);
+  } 
+  else 
+  { 
+    myGLCD.printNumI(on4_minuto, 229, 117);
+  } 
+
+  if (on5_hora < 10) // Timer 5
+  { 
+    myGLCD.print("0",268, 117);  
+    myGLCD.printNumI(on5_hora, 277, 117);
+  }
+  else
+  {
+    myGLCD.printNumI(on5_hora, 268, 117);
+  } 
+
+  myGLCD.print(":",285, 117);          
+
+  if (on5_minuto < 10)
+  { 
+    myGLCD.print("0", 293, 117); 
+    myGLCD.printNumI(on5_minuto, 302, 117);
+  } 
+  else 
+  { 
+    myGLCD.printNumI(on5_minuto, 293, 117);
+  } 
+
+  if (off1_hora < 10) // Timer 1
+  { 
+    myGLCD.print("0",12, 211); 
+    myGLCD.printNumI(off1_hora, 21, 211);
+  }
+  else
+  {
+    myGLCD.printNumI(off1_hora, 12, 211);
+  }
+
+  myGLCD.print(":", 29, 210); 
+
+  if (off1_minuto < 10)
+  { 
+    myGLCD.print("0", 37, 211);
+    myGLCD.printNumI(off1_minuto, 46, 211);
+  } 
+  else 
+  { 
+    myGLCD.printNumI(off1_minuto, 37,211);
+  }      
+
+  if (off2_hora < 10) // Timer 2
+  { 
+    myGLCD.print("0", 76, 211);
+    myGLCD.printNumI(off2_hora , 85, 211);
+  }
+  else
+  {
+    myGLCD.printNumI(off2_hora, 76, 211);
+  }
+
+  myGLCD.print(":", 93, 211);    
+
+  if (off2_minuto < 10)
+  { 
+    myGLCD.print("0",101, 211);  
+    myGLCD.printNumI(off2_minuto, 110, 211);
+  } 
+  else 
+  { 
+    myGLCD.printNumI(off2_minuto,101, 211);
+  } 
+
+  if (off3_hora <10) // Timer 3
+  { 
+    myGLCD.print("0", 140, 211);   
+    myGLCD.printNumI(off3_hora, 149, 211);
+  }
+  else
+  {
+    myGLCD.printNumI(off3_hora, 140, 211);
+  } 
+
+  myGLCD.print(":", 157, 211);          
+
+  if (off3_minuto < 10)
+  { 
+    myGLCD.print("0", 165, 211);  
+    myGLCD.printNumI(off3_minuto, 174, 211);
+  } 
+  else 
+  { 
+    myGLCD.printNumI(off3_minuto, 165, 211);
+  } 
+
+  if (off4_hora < 10) // Timer 4
+  { 
+    myGLCD.print("0", 204, 211); 
+    myGLCD.printNumI(off4_hora, 213, 211);
+  }
+  else
+  {
+    myGLCD.printNumI(off4_hora, 204, 211);
+  }
+
+  myGLCD.print(":", 221, 211);         
+
+  if (off4_minuto < 10)
+  { 
+    myGLCD.print("0", 229, 211);  
+    myGLCD.printNumI(off4_minuto, 238, 211);
+  } 
+  else 
+  { 
+    myGLCD.printNumI(off4_minuto, 229, 211);
+  } 
+
+  if (off5_hora < 10) // Timer 5
+  { 
+    myGLCD.print("0", 268, 211);  
+    myGLCD.printNumI(off5_hora, 277, 211);
+  }
+  else
+  {
+    myGLCD.printNumI(off5_hora, 268, 211);
+  } 
+
+  myGLCD.print(":", 285, 211);          
+
+  if (off5_minuto < 10)
+  { 
+    myGLCD.print("0", 293, 211); 
+    myGLCD.printNumI(off5_minuto, 302, 211);
+  } 
+  else { 
+    myGLCD.printNumI(off5_minuto, 293, 211);
+  }
+
+  printButton("MENU 2", menU[0], menU[1], menU[2], menU[3]); //Volta ao menu 1.
+  printButton("INICIO", iniC[0], iniC[1], iniC[2], iniC[3]); // Volta ao início.
+} 
+//--------------------------------------------- Configurar timers -------------------------------- tela =39
+void config_timer(boolean refreshAll=false)
+{
+  if( refreshAll == true)
+  {
+    on1_minuto_temp2 = on1_minuto;
+    on1_hora_temp2 = on1_hora;
+    on2_minuto_temp2 = on2_minuto;
+    on2_hora_temp2 = on2_hora;
+    on3_minuto_temp2 = on3_minuto;
+    on3_hora_temp2 = on3_hora;
+    on4_minuto_temp2 = on4_minuto;
+    on4_hora_temp2 = on4_hora;
+    on5_minuto_temp2 = on5_minuto;
+    on5_hora_temp2 = on5_hora ;
+    off1_minuto_temp2 = off1_minuto;
+    off1_hora_temp2 = off1_hora;
+    off2_minuto_temp2 = off2_minuto;
+    off2_hora_temp2 = off2_hora;
+    off3_minuto_temp2 = off3_minuto;
+    off3_hora_temp2 = off3_hora;
+    off4_minuto_temp2 = off4_minuto;
+    off4_hora_temp2 = off4_hora;
+    off5_minuto_temp2 = off5_minuto;
+    off5_hora_temp2 = off5_hora;
+    temporizador_1_ativado_temp2 = temporizador_1_ativado;
+    temporizador_2_ativado_temp2 = temporizador_2_ativado;
+    temporizador_3_ativado_temp2 = temporizador_3_ativado;
+    temporizador_4_ativado_temp2 = temporizador_4_ativado;
+    temporizador_5_ativado_temp2 = temporizador_5_ativado;
+
+    if(temporizador_1 == true)
+    {
+      printHeader("CONFIGURAR TIMER 1");
+    }
+    else if(temporizador_2 == true)
+    {
+      printHeader("CONFIGURAR TIMER 2");
+    }
+    else  if(temporizador_3 == true)
+    {
+      printHeader("CONFIGURAR TIMER 3");
+    }
+    else if(temporizador_4 == true)
+    {
+      printHeader("CONFIGURAR TIMER 4");
+    }
+    else if(temporizador_5 == true)
+    {
+      printHeader("CONFIGURAR TIMER 5");
+    }
+
+    printButton_verde("LIGAR TIMER", 8, 17, 142, 34);
+    printButton_vermelho("DESLIGAR TIMER", 173, 17, 312, 34);
+    printButton("+", 21, 45, 65, 88, true);    // Botão para cima
+    printButton("+", 89, 45, 133, 88, true);    // Botão para cima
+    printButton("-", 21, 135, 65, 178, true); // Botão para baixo
+    printButton("-", 89, 135, 133, 178, true); // Botão para baixo
+
+    printButton("+", 187, 45, 231, 88, true);    // Botão para cima
+    printButton("+", 255, 45, 299, 88, true);    // Botão para cima
+    printButton("-", 187, 135, 231, 178, true); // Botão para baixo
+    printButton("-", 255, 135, 299, 178, true); // Botão para baixo
+
+    printButton("MENU 2", menU[0], menU[1], menU[2], menU[3]); // Volta ao menu 2.
+    printButton("INICIO", iniC[0], iniC[1], iniC[2], iniC[3]); // Volta ao início.
+    printButton("VOLTAR", volT[0], volT[1], volT[2], volT[3]); // Volta ao menu selecionar timer.
+    printButton("SALVAR", salV[0], salV[1], salV[2], salV[3]); // Salva as modificações.
+
+    setFont(LARGE, 255, 255, 255, 0, 0, 0);          
+    myGLCD.print(":",70, 103);
+    myGLCD.print(":",236, 103);
+  }
+  setFont(LARGE, 255, 255, 255, 0, 0, 0);
+
+  if(temporizador_1 == true)
+  {
+    if (on1_hora_temp2 < 10)
+    {
+      myGLCD.print("0",27, 100);           
+      myGLCD.printNumI(on1_hora_temp2, 44, 100);
+    } 
+    else 
+    {
+      myGLCD.printNumI(on1_hora_temp2, 27, 100);
+    }
+
+    if (on1_minuto_temp2 < 10)
+    {                            
+      myGLCD.print("0", 95, 100);
+      myGLCD.printNumI(on1_minuto_temp2, 112, 100);
+    } 
+    else 
+    {
+      myGLCD.printNumI(on1_minuto_temp2, 95, 100);
+    }
+
+    if (off1_hora_temp2 < 10)
+    {
+      myGLCD.print("0",193, 100);            
+      myGLCD.printNumI(off1_hora_temp2, 210, 100);
+    } 
+    else 
+    {
+      myGLCD.printNumI(off1_hora_temp2, 193, 100);
+    }
+
+    if (off1_minuto_temp2 < 10)
+    {
+      myGLCD.print("0",262, 100); 
+      myGLCD.printNumI(off1_minuto_temp2, 279, 100);
+    } 
+    else 
+    {
+      myGLCD.printNumI(off1_minuto_temp2, 262, 100);
+    }
+    if (temporizador_1_ativado_temp2 == 1) 
+    {
+      printButton_verde("ATIVADO", domI[0]-20, domI[1], domI[2]+20, domI[3]); // Ativado 120, 193, 200, 233
+    }
+    else 
+    {
+      printButton("DESATIVADO", domI[0]-20, domI[1], domI[2]+20, domI[3]); // Desativado
+    } 
+  }
+  else if(temporizador_2 == true)
+  {
+    if (on2_hora_temp2 < 10)
+    {
+      myGLCD.print("0",27, 100);           
+      myGLCD.printNumI(on2_hora_temp2, 44, 100);
+    } 
+    else 
+    {
+      myGLCD.printNumI(on2_hora_temp2, 27, 100);
+    }
+
+    if (on2_minuto_temp2 < 10)
+    {                            
+      myGLCD.print("0", 95, 100);
+      myGLCD.printNumI(on2_minuto_temp2, 112, 100);
+    } 
+    else 
+    {
+      myGLCD.printNumI(on2_minuto_temp2, 95, 100);
+    }
+
+    if (off2_hora_temp2 < 10)
+    {
+      myGLCD.print("0",193, 100);            
+      myGLCD.printNumI(off2_hora_temp2, 210, 100);
+    } 
+    else 
+    {
+      myGLCD.printNumI(off2_hora_temp2, 193, 100);
+    }
+
+    if (off2_minuto_temp2 < 10)
+    {
+      myGLCD.print("0",262, 100); 
+      myGLCD.printNumI(off2_minuto_temp2, 279, 100);
+    } 
+    else 
+    {
+      myGLCD.printNumI(off2_minuto_temp2, 262, 100);
+    } 
+    if (temporizador_2_ativado_temp2 == 1) 
+    {
+      printButton_verde("ATIVADO", domI[0]-20, domI[1], domI[2]+20, domI[3]); // Ativado
+    }
+    else 
+    {
+      printButton("DESATIVADO", domI[0]-20, domI[1], domI[2]+20, domI[3]); // Desativado
+    }
+  }
+  else  if(temporizador_3 == true)
+  {
+    if (on3_hora_temp2 < 10)
+    {
+      myGLCD.print("0",27, 100);           
+      myGLCD.printNumI(on3_hora_temp2, 44, 100);
+    } 
+    else 
+    {
+      myGLCD.printNumI(on3_hora_temp2, 27, 100);
+    }
+
+    if (on3_minuto_temp2 < 10)
+    {                            
+      myGLCD.print("0", 95, 100);
+      myGLCD.printNumI(on3_minuto_temp2, 112, 100);
+    } 
+    else 
+    {
+      myGLCD.printNumI(on3_minuto_temp2, 95, 100);
+    }
+
+    if (off3_hora_temp2 < 10)
+    {
+      myGLCD.print("0",193, 100);            
+      myGLCD.printNumI(off3_hora_temp2, 210, 100);
+    } 
+    else 
+    {
+      myGLCD.printNumI(off3_hora_temp2, 193, 100);
+    }
+
+    if (off3_minuto_temp2 < 10)
+    {
+      myGLCD.print("0",262, 100); 
+      myGLCD.printNumI(off3_minuto_temp2, 279, 100);
+    } 
+    else 
+    {
+      myGLCD.printNumI(off3_minuto_temp2, 262, 100);
+    } 
+    if (temporizador_3_ativado_temp2 == 1) 
+    {
+      printButton_verde("ATIVADO", domI[0]-20, domI[1], domI[2]+20, domI[3]); // Ativado
+    }
+    else 
+    {
+      printButton("DESATIVADO", domI[0]-20, domI[1], domI[2]+20, domI[3]); // Desativado
+    }
+  }
+  else if(temporizador_4 == true)
+  {
+    if (on4_hora_temp2 < 10)
+    {
+      myGLCD.print("0",27, 100);           
+      myGLCD.printNumI(on4_hora_temp2, 44, 100);
+    } 
+    else 
+    {
+      myGLCD.printNumI(on4_hora_temp2, 27, 100);
+    }
+
+    if (on4_minuto_temp2 < 10)
+    {                            
+      myGLCD.print("0", 95, 100);
+      myGLCD.printNumI(on4_minuto_temp2, 112, 100);
+    } 
+    else 
+    {
+      myGLCD.printNumI(on4_minuto_temp2, 95, 100);
+    }
+
+    if (off4_hora_temp2 < 10)
+    {
+      myGLCD.print("0",193, 100);            
+      myGLCD.printNumI(off4_hora_temp2, 210, 100);
+    } 
+    else 
+    {
+      myGLCD.printNumI(off4_hora_temp2, 193, 100);
+    }
+
+    if (off4_minuto_temp2 < 10)
+    {
+      myGLCD.print("0",262, 100); 
+      myGLCD.printNumI(off4_minuto_temp2, 279, 100);
+    } 
+    else 
+    {
+      myGLCD.printNumI(off4_minuto_temp2, 262, 100);
+    }
+    if (temporizador_4_ativado_temp2 == 1) 
+    {
+      printButton_verde("ATIVADO", domI[0]-20, domI[1], domI[2]+20, domI[3]); // Ativado
+    }
+    else 
+    {
+      printButton("DESATIVADO", domI[0]-20, domI[1], domI[2]+20, domI[3]); // Desativado
+    }
+  } 
+  if(temporizador_5 == true)
+  {
+    if (on5_hora_temp2 < 10)
+    {
+      myGLCD.print("0",27, 100);           
+      myGLCD.printNumI(on5_hora_temp2, 44, 100);
+    } 
+    else 
+    {
+      myGLCD.printNumI(on5_hora_temp2, 27, 100);
+    }
+
+    if (on5_minuto_temp2 < 10)
+    {                            
+      myGLCD.print("0", 95, 100);
+      myGLCD.printNumI(on5_minuto_temp2, 112, 100);
+    } 
+    else 
+    {
+      myGLCD.printNumI(on5_minuto_temp2, 95, 100);
+    }
+
+    if (off5_hora_temp2 < 10)
+    {
+      myGLCD.print("0",193, 100);            
+      myGLCD.printNumI(off5_hora_temp2, 210, 100);
+    } 
+    else 
+    {
+      myGLCD.printNumI(off5_hora_temp2, 193, 100);
+    }
+
+    if (off5_minuto_temp2 < 10)
+    {
+      myGLCD.print("0",262, 100); 
+      myGLCD.printNumI(off5_minuto_temp2, 279, 100);
+    } 
+    else 
+    {
+      myGLCD.printNumI(off5_minuto_temp2, 262, 100);
+    }  
+    if (temporizador_5_ativado_temp2 == 1) 
+    {
+      printButton_verde("ATIVADO", domI[0]-20, domI[1], domI[2]+20, domI[3]); // Ativado
+    }
+    else 
+    {
+      printButton("DESATIVADO", domI[0]-20, domI[1], domI[2]+20, domI[3]); // Desativado
+    }
+  }
+}
+
+
+
+
+
 
 

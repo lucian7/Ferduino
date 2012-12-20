@@ -202,3 +202,8 @@ void waitForIt(int x1, int y1, int x2, int y2)
   myGLCD.setColor(255, 255, 255);
   myGLCD.drawRoundRect (x1, y1, x2, y2);
 }
+
+int NumMins(uint8_t ScheduleHour, uint8_t ScheduleMinute)
+{
+  return (ScheduleHour*60) + ScheduleMinute;
+}
